@@ -8,7 +8,7 @@ tokens = [
     'ID',
     'RBRA', 'LBRA', 'COLON', 'SEMICOLON',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN', 'RELOP', "CTESTRING", "CTEI", "CTEF", "COMMA"
+    'LPAREN','RPAREN', 'RELOP', "CHARACTER", "INTEGER", "NUMERIC", "LOGICAL", "COMMA", "AND", "OR", "NOT"
     ]
 
 reserved = {
@@ -16,9 +16,14 @@ reserved = {
    'else'     :  'ELSE',
    'var'      :  'VAR',
    'program'  :  'PROGRAM',
+   'main'     :  'MAIN',
    'int'      :  'INT',
-   'float'    :  'FLOAT',
-   'print'    :  'PRINT',
+   'num'      :  'NUM',
+   'write'    :  'WRITE',
+   'read'     :  'READ',
+   'for'      :  'FOR',
+   'char'     :  'CHAR',
+   'bool'     :  'BOOL'
 }
 tokens += reserved.values()
 
@@ -35,7 +40,10 @@ t_DIVIDE  = r'/'
 t_EQUALS  = r'='
 t_LPAREN  = r'\('
 t_RPAREN  = r'\)'
-t_RELOP   = r'<|>|<>'
+t_AND  = r'\&'
+t_OR  = r'\|'
+t_NOT  = r'\!'
+t_RELOP   = r'<|>|==|<=|>=|!='
 
 def t_ID(t):
     r'[a-zA-Z_][a-zA-Z0-9_]*'
@@ -43,21 +51,25 @@ def t_ID(t):
         t.type = reserved[ t.value ]
     return t
 
-def t_CTESTRING(t):
+def t_CHARACTER(t):
     r'\"[a-zA-Z_][a-zA-Z0-9_]*\"'
     if t.value in reserved:
         t.type = reserved[ t.value ]
     return t
 
-def t_CTEI(t):
+def t_INTEGER(t):
     r'\d+'
     t.value = int(t.value)
     return t
 
-def t_CTEF(t):
+def t_NUMERIC(t):
     r'\d+'
     t.value = float(t.value)
     return t
+
+def t_LOGICAL(t):
+	r'true|false'
+	return t
 
 # Ignored characters
 t_ignore = " \t"
@@ -86,12 +98,29 @@ while True:
 # dictionary of names (for storing variables)
 names = { }
 
+# PROGRAM
 def p_programa_start(p):
-    'programa : PROGRAM ID SEMICOLON programa2 bloque'
+    'programa : PROGRAM ID SEMICOLON programa2 programa3 main'
 
 def p_program2(p):
-    '''programa2 : vars
+    '''programa2 : vars programa2
                 | empty'''
+
+def p_programa3(p):
+    '''programa3 : func programa3
+                | empty'''
+
+# MAIN
+def p_main(p):
+    '''main :  LBRA vars main2 RBRA'''
+
+def p_main2(p):
+    '''main2 : estatuto main2
+                | empty'''
+
+
+
+# Valeria, checa el apartado de VARS por favor.
 def p_vars(p):
     'vars : VAR vars2 vars4'
 
@@ -104,10 +133,9 @@ def p_vars3(p):
 def p_vars4(p):
     '''vars4 : empty
              | vars2'''
-def p_type(p):
-    '''type : INT
-            | FLOAT'''
 
+
+# BLOQUE
 def p_bloque(p):
     'bloque : LBRA bloque2 RBRA'
 
@@ -115,19 +143,52 @@ def p_bloque2(p):
     '''bloque2 : empty
                | estatuto bloque2'''
 
-def p_estatuto(p):
-    '''estatuto : asignacion
-                | condi
-                | escritura'''
+# TIPO
+def p_type(p):
+    '''type : BOOL
+            | CHAR
+            | INT
+            | NUM'''
 
-def p_asignacion(p):
-    'asignacion : ID EQUALS expresion SEMICOLON'
 
+# EXPRESIONLOGICA
+def p_exlog(p):
+    'exlog: exlog2 expresion exlog3'
+
+def p_exlog2(p):
+    '''exlog2 : NOT
+              | empty'''
+
+def p_exlog3(p):
+    '''exlog3 : AND exlog
+              | OR exlog
+              | empty'''
+
+
+# EXP
 def p_expresion(p):
     'expresion : exp expresion2'
 def p_expresion2(p):
     '''expresion2 : empty
                   | RELOP exp'''
+
+# ESTATUTO
+def p_estatuto(p):
+    '''estatuto : estatuto2 SEMICOLON'''
+
+def p_estatuto2(p):
+    '''estatuto2 : condicion
+                | ciclo
+                | funccall
+                | asignacion
+                | read
+                | write
+                | return
+                | specfunc'''
+
+# ASIGNACION
+def p_asignacion(p):
+    'asignacion : ID EQUALS expresion SEMICOLON'
 
 def p_escritura(p):
     'escritura : PRINT LPAREN interior RPAREN SEMICOLON'
@@ -140,8 +201,8 @@ def p_escritura2(p):
     '''escritura2 : COMMA interior
                   | empty'''
 
-def p_condi(p):
-    'condi : IF LPAREN expresion RPAREN bloque condi2'
+def p_condicion(p):
+    'condicion : IF LPAREN expresion RPAREN bloque condi2'
 
 def p_condi2(p):
     '''condi2 : ELSE bloque
