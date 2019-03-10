@@ -2,7 +2,17 @@
 # eva_lex
 #
 # Adrian Gerardo Peña Barrera A00816456
+# Valeria Rocha Sepúlveda [Matrícula]
+#
 # -----------------------------------------------------------------------------
+
+'''
+PENDIENTES:
+- Checar el apartado de vars
+- Checar el apartado de Write
+- Checar si en asignación podemos sostener una funccall y verificar el uso correcto del ; en ese caso.
+- Probar con prueba.txt una vez terminado.
+'''
 
 tokens = [
     'ID',
