@@ -6,9 +6,9 @@
 
 tokens = [
     'ID',
-    'RBRA', 'LBRA', 'COLON', 'SEMICOLON',
+    'RBRA', 'LBRA','RSBRA', 'LSBRA', 'COLON', 'SEMICOLON',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN', 'RELOP', "CHARACTER", "INTEGER", "NUMERIC", "LOGICAL", "COMMA", "AND", "OR", "NOT"
+    'LPAREN','RPAREN', 'RELOP', "CHARACTER", "INTEGER", "NUMERIC", "LOGICAL", "COMMA", "AND", "OR", "NOT", "RETURN"
     ]
 
 reserved = {
@@ -23,13 +23,16 @@ reserved = {
    'read'     :  'READ',
    'for'      :  'FOR',
    'char'     :  'CHAR',
-   'bool'     :  'BOOL'
+   'bool'     :  'BOOL',
+   'return'   :  'RETURN'
 }
 tokens += reserved.values()
 
 # Tokens
 t_LBRA    = r'\{'
 t_RBRA    = r'\}'
+t_LSBRA    = r'\['
+t_RSBRA    = r'\]'
 t_COLON    = r':'
 t_COMMA    = r','
 t_SEMICOLON = r';'
@@ -188,8 +191,101 @@ def p_estatuto2(p):
 
 # ASIGNACION
 def p_asignacion(p):
-    'asignacion : ID EQUALS expresion SEMICOLON'
+    'asignacion : idmv EQUALS exlog SEMICOLON'
 
+# DATA
+def p_data(p):
+    '''data : NUMERIC
+            | CHARACTER
+            | LOGICAL
+            | idmvf'''
+
+# RETURN
+def p_return(p):
+    '''return : RETURN return2'''
+
+def p_return2(p):
+    '''return2 : exlog
+               | data
+               | empty '''
+
+# IDMVF
+def p_idmvf(p):
+    'idmvf : ID idmvf2'
+
+def p_idmvf2(p):
+    '''idmvf2 : LSBRA exp RSBRA LSBRA exp RSBRA
+              | LPAREN exp RPAREN
+              | empty'''
+
+# IDMV
+def p_idmv(p):
+    'idmv : ID idmv2'
+
+def p_idmv2(p):
+    '''idmv2 : LSBRA exp RSBRA LSBRA exp RSBRA
+              | empty'''
+
+# ARGS
+def p_args(p):
+    'args : tipo ID args2'
+
+def p_args2(p):
+    '''args2 : COMMA args
+              | empty'''
+
+# FUNCCALL
+def p_funccall(p):
+    'funccall : ID LPAREN funccall2 RPAREN'
+
+def p_funccall2(p):
+    '''funccall2 : exp funccall3
+              | empty'''
+
+def p_funccall3(p):
+    '''funccall3 : COMMA exp funccall3
+              | empty'''
+
+
+# CONDICION
+def p_condicion(p):
+    'condicion : IF LPAREN exlog RPAREN bloque condi2'
+
+def p_condicion2(p):
+    '''condicion2 : ELSE bloque
+              | empty'''
+
+# EXP
+def p_exp(p):
+    'exp : term exp2'
+    
+def p_exp2(p):
+    '''exp2 : empty
+            | PLUS exp
+            | MINUS exp'''
+
+# TERM
+def p_term(p):
+    'term : factor term2'
+
+def p_term2(p):
+    '''term2 : empty
+             | TIMES term
+             | DIVIDE term'''
+
+def p_factor(p):
+    '''factor : LPAREN expresion RPAREN
+              | PLUS varcte
+              | MINUS varcte
+              | varcte'''
+# VARCTE (Factor solo puede hacer uso de ids, numeric y integers, no de characters ni logicals, por eso se hizo este bloque.)
+def p_varcte(p):
+    '''varcte : ID
+              | NUMERIC
+              | INTEGER'''
+
+            
+# WRITE Favor de checarlo
 def p_escritura(p):
     'escritura : PRINT LPAREN interior RPAREN SEMICOLON'
 
@@ -201,37 +297,6 @@ def p_escritura2(p):
     '''escritura2 : COMMA interior
                   | empty'''
 
-def p_condicion(p):
-    'condicion : IF LPAREN expresion RPAREN bloque condi2'
-
-def p_condi2(p):
-    '''condi2 : ELSE bloque
-              | empty'''
-
-def p_exp(p):
-    'exp : term exp2'
-def p_exp2(p):
-    '''exp2 : empty
-            | PLUS exp
-            | MINUS exp'''
-
-def p_term(p):
-    'term : factor term2'
-def p_term2(p):
-    '''term2 : empty
-             | TIMES term
-             | DIVIDE term'''
-
-def p_factor(p):
-    '''factor : LPAREN expresion RPAREN
-              | PLUS varcte
-              | MINUS varcte
-              | varcte'''
-
-def p_varcte(p):
-    '''varcte : ID
-              | CTEI
-              | CTEF'''
 
 def p_empty(p):
  'empty :'
