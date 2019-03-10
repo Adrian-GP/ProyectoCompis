@@ -1,0 +1,17 @@
+program  id;
+
+int i1, i2;
+
+function int hola (int i, number n) {
+
+    int i3;
+
+    i3 = 1;
+}
+
+
+main{
+int id5;
+id5 = 3;
+	print("soyunstring");
+}
