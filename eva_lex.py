@@ -320,7 +320,7 @@ import ply.yacc as yacc
 yacc.yacc()
 def loadFile():
     fn = input('Source Code File > ')
-    file = open(fn+'.txt', 'r', encoding="utf8")
+    file = open(fn+'.eva', 'r', encoding="utf8")
     s = file.read()
     yacc.parse(s)
 loadFile()
