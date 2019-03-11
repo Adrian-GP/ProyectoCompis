@@ -221,7 +221,7 @@ def p_estatuto2(p):
 
 # ASIGNACION
 def p_asignacion(p):
-    'asignacion : idmv EQUALS exlog SEMICOLON'
+    'asignacion : idmv EQUALS exlog'
 
 # DATA
 def p_data(p):
@@ -230,7 +230,8 @@ def p_data(p):
             | LOGICAL
             | INTEGER
             | idmv
-            | funccall'''
+            | funccall
+            | read'''
 
 # RETURN
 def p_return(p):
@@ -313,7 +314,7 @@ def p_term2(p):
              | DIVIDE term'''
 
 def p_factor(p):
-    '''factor : LPAREN expresion RPAREN
+    '''factor : LPAREN exlog RPAREN
               | PLUS data
               | MINUS data
               | data'''
