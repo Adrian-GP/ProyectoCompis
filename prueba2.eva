@@ -1,0 +1,15 @@
+program prueba;
+
+int id1, id2;
+
+function void miFuncion(){
+  char c1;
+  c1 = "hola";
+}
+
+main{
+  num id3;
+
+  id3 = 4 + 5;
+  
+}

@@ -2,7 +2,7 @@
 # eva_lex
 #
 # Adrian Gerardo Peña Barrera A00816456
-# Valeria Rocha Sepúlveda [Matrícula]
+# Valeria Rocha Sepúlveda A01193039
 #
 # -----------------------------------------------------------------------------
 
@@ -18,7 +18,7 @@ tokens = [
     'ID',
     'RBRA', 'LBRA','RSBRA', 'LSBRA', 'COLON', 'SEMICOLON',
     'PLUS','MINUS','TIMES','DIVIDE','EQUALS',
-    'LPAREN','RPAREN', 'RELOP', "CHARACTER", "INTEGER", "NUMERIC", "LOGICAL", "COMMA", "AND", "OR", "NOT", "RETURN"
+    'LPAREN','RPAREN', 'RELOP', "CHARACTER", "INTEGER", "NUMERIC", "LOGICAL", "COMMA", "AND", "OR", "NOT"
     ]
 
 reserved = {
@@ -34,7 +34,9 @@ reserved = {
    'for'      :  'FOR',
    'char'     :  'CHAR',
    'bool'     :  'BOOL',
-   'return'   :  'RETURN'
+   'return'   :  'RETURN',
+   'function' : 'FUNCTION',
+   'void'     : 'VOID'
 }
 tokens += reserved.values()
 
@@ -124,28 +126,47 @@ def p_programa3(p):
                 | empty'''
 
 # MAIN
+# def p_main(p):
+#     '''main :  LBRA vars main2 RBRA'''
+#
+# def p_main2(p):
+#     '''main2 : estatuto main2
+#                 | empty'''
+
 def p_main(p):
-    '''main :  LBRA vars main2 RBRA'''
+    '''main :  MAIN LBRA mainvars main2 RBRA'''
 
 def p_main2(p):
     '''main2 : estatuto main2
                 | empty'''
 
+def p_mainvars(p):
+    '''mainvars : vars mainvars
+                | empty'''
 
+#################
 
 # Valeria, checa el apartado de VARS por favor.
+# def p_vars(p):
+#     'vars : VAR vars2 vars4'
+#
+# def p_vars2(p):
+#     'vars2 : ID vars3 COLON type SEMICOLON'
+#
+# def p_vars3(p):
+#     '''vars3 : empty
+#              | COMMA ID vars3'''
+# def p_vars4(p):
+#     '''vars4 : empty
+#              | vars2'''
+
+#MANERA como esta en los diagramas de sintaxis
 def p_vars(p):
-    'vars : VAR vars2 vars4'
+    'vars : type idmv vars2 SEMICOLON'
 
 def p_vars2(p):
-    'vars2 : ID vars3 COLON type SEMICOLON'
-
-def p_vars3(p):
-    '''vars3 : empty
-             | COMMA ID vars3'''
-def p_vars4(p):
-    '''vars4 : empty
-             | vars2'''
+    '''vars2 : empty
+             | COMMA idmv vars2'''
 
 
 # BLOQUE
@@ -166,7 +187,7 @@ def p_type(p):
 
 # EXPRESIONLOGICA
 def p_exlog(p):
-    'exlog: exlog2 expresion exlog3'
+    'exlog : exlog2 expresion exlog3'
 
 def p_exlog2(p):
     '''exlog2 : NOT
@@ -195,9 +216,8 @@ def p_estatuto2(p):
                 | funccall
                 | asignacion
                 | read
-                | write
-                | return
-                | specfunc'''
+                | escritura
+                | return'''
 
 # ASIGNACION
 def p_asignacion(p):
@@ -208,7 +228,9 @@ def p_data(p):
     '''data : NUMERIC
             | CHARACTER
             | LOGICAL
-            | idmvf'''
+            | INTEGER
+            | idmv
+            | funccall'''
 
 # RETURN
 def p_return(p):
@@ -216,29 +238,34 @@ def p_return(p):
 
 def p_return2(p):
     '''return2 : exlog
-               | data
                | empty '''
 
 # IDMVF
 def p_idmvf(p):
     'idmvf : ID idmvf2'
 
+
 def p_idmvf2(p):
-    '''idmvf2 : LSBRA exp RSBRA LSBRA exp RSBRA
+    '''idmvf2 : LSBRA exp RSBRA idmvf3
               | LPAREN exp RPAREN
+              | empty'''
+
+def p_idmvf3(p):
+    '''idmvf3 : LSBRA exp RSBRA
               | empty'''
 
 # IDMV
 def p_idmv(p):
     'idmv : ID idmv2'
 
+
 def p_idmv2(p):
-    '''idmv2 : LSBRA exp RSBRA LSBRA exp RSBRA
+    '''idmv2 : LSBRA exp RSBRA idmvf3
               | empty'''
 
 # ARGS
 def p_args(p):
-    'args : tipo ID args2'
+    'args : type ID args2'
 
 def p_args2(p):
     '''args2 : COMMA args
@@ -258,8 +285,10 @@ def p_funccall3(p):
 
 
 # CONDICION
+# def p_condicion(p):
+#     'condicion : IF LPAREN exlog RPAREN bloque condi2'
 def p_condicion(p):
-    'condicion : IF LPAREN exlog RPAREN bloque condi2'
+    'condicion : IF LPAREN exlog RPAREN bloque condicion2'
 
 def p_condicion2(p):
     '''condicion2 : ELSE bloque
@@ -268,7 +297,7 @@ def p_condicion2(p):
 # EXP
 def p_exp(p):
     'exp : term exp2'
-    
+
 def p_exp2(p):
     '''exp2 : empty
             | PLUS exp
@@ -285,28 +314,61 @@ def p_term2(p):
 
 def p_factor(p):
     '''factor : LPAREN expresion RPAREN
-              | PLUS varcte
-              | MINUS varcte
-              | varcte'''
+              | PLUS data
+              | MINUS data
+              | data'''
 # VARCTE (Factor solo puede hacer uso de ids, numeric y integers, no de characters ni logicals, por eso se hizo este bloque.)
-def p_varcte(p):
-    '''varcte : ID
-              | NUMERIC
-              | INTEGER'''
+#AGREGAR
+# def p_varcte(p):
+#     '''varcte : ID
+#               | NUMERIC
+#               | INTEGER'''
 
-            
+
 # WRITE Favor de checarlo
 def p_escritura(p):
-    'escritura : PRINT LPAREN interior RPAREN SEMICOLON'
+    'escritura : WRITE LPAREN interior RPAREN'
 
 def p_interior(p):
     '''interior : expresion escritura2
-                | CTESTRING escritura2'''
+                | CHARACTER escritura2'''
 
 def p_escritura2(p):
     '''escritura2 : COMMA interior
                   | empty'''
 
+def p_read(p):
+    'read : READ LPAREN read2 RPAREN'
+
+def p_read2(p):
+    '''read2 : CHARACTER
+                | empty'''
+
+def p_func(p):
+    'func : FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA'
+
+def p_functipo(p):
+    '''functipo : type
+                | VOID'''
+
+def p_funcargs(p):
+    '''funcargs : args
+                | empty'''
+
+def p_funcEst(p):
+    '''funcest : estatuto funcest
+                | empty'''
+
+def p_funcvars(p):
+    '''funcvars : vars funcvars
+                | empty'''
+
+def p_ciclo(p):
+    'ciclo : FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque'
+
+def p_ciclo1(p):
+    '''ciclo1 : asignacion
+                | empty'''
 
 def p_empty(p):
  'empty :'
@@ -332,4 +394,3 @@ loadFile()
     except EOFError:
         break
 '''
-

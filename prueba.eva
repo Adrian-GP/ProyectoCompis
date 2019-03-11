@@ -2,7 +2,7 @@ program  id;
 
 int i1, i2;
 
-function int hola (int i, number n) {
+function int hola (int i, num n) {
 
     int i3;
 
@@ -13,5 +13,5 @@ function int hola (int i, number n) {
 main{
 int id5;
 id5 = 3;
-	print("soyunstring");
+	write("soyunstring");
 }

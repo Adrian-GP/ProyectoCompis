@@ -1,0 +1,2926 @@
+Created by PLY version 3.11 (http://www.dabeaz.com/ply)
+
+Unused terminals:
+
+    COLON
+    VAR
+
+Grammar
+
+Rule 0     S' -> programa
+Rule 1     programa -> PROGRAM ID SEMICOLON programa2 programa3 main
+Rule 2     programa2 -> vars programa2
+Rule 3     programa2 -> empty
+Rule 4     programa3 -> func programa3
+Rule 5     programa3 -> empty
+Rule 6     main -> MAIN LBRA mainvars main2 RBRA
+Rule 7     main2 -> estatuto main2
+Rule 8     main2 -> empty
+Rule 9     mainvars -> vars mainvars
+Rule 10    mainvars -> empty
+Rule 11    vars -> type idmv vars2 SEMICOLON
+Rule 12    vars2 -> empty
+Rule 13    vars2 -> COMMA idmv vars2
+Rule 14    bloque -> LBRA bloque2 RBRA
+Rule 15    bloque2 -> empty
+Rule 16    bloque2 -> estatuto bloque2
+Rule 17    type -> BOOL
+Rule 18    type -> CHAR
+Rule 19    type -> INT
+Rule 20    type -> NUM
+Rule 21    exlog -> exlog2 expresion exlog3
+Rule 22    exlog2 -> NOT
+Rule 23    exlog2 -> empty
+Rule 24    exlog3 -> AND exlog
+Rule 25    exlog3 -> OR exlog
+Rule 26    exlog3 -> empty
+Rule 27    expresion -> exp expresion2
+Rule 28    expresion2 -> empty
+Rule 29    expresion2 -> RELOP exp
+Rule 30    estatuto -> estatuto2 SEMICOLON
+Rule 31    estatuto2 -> condicion
+Rule 32    estatuto2 -> ciclo
+Rule 33    estatuto2 -> funccall
+Rule 34    estatuto2 -> asignacion
+Rule 35    estatuto2 -> read
+Rule 36    estatuto2 -> escritura
+Rule 37    estatuto2 -> return
+Rule 38    asignacion -> idmv EQUALS exlog SEMICOLON
+Rule 39    data -> NUMERIC
+Rule 40    data -> CHARACTER
+Rule 41    data -> LOGICAL
+Rule 42    data -> INTEGER
+Rule 43    data -> idmv
+Rule 44    data -> funccall
+Rule 45    return -> RETURN return2
+Rule 46    return2 -> exlog
+Rule 47    return2 -> empty
+Rule 48    idmvf -> ID idmvf2
+Rule 49    idmvf2 -> LSBRA exp RSBRA idmvf3
+Rule 50    idmvf2 -> LPAREN exp RPAREN
+Rule 51    idmvf2 -> empty
+Rule 52    idmvf3 -> LSBRA exp RSBRA
+Rule 53    idmvf3 -> empty
+Rule 54    idmv -> ID idmv2
+Rule 55    idmv2 -> LSBRA exp RSBRA idmvf3
+Rule 56    idmv2 -> empty
+Rule 57    args -> type ID args2
+Rule 58    args2 -> COMMA args
+Rule 59    args2 -> empty
+Rule 60    funccall -> ID LPAREN funccall2 RPAREN
+Rule 61    funccall2 -> exp funccall3
+Rule 62    funccall2 -> empty
+Rule 63    funccall3 -> COMMA exp funccall3
+Rule 64    funccall3 -> empty
+Rule 65    condicion -> IF LPAREN exlog RPAREN bloque condicion2
+Rule 66    condicion2 -> ELSE bloque
+Rule 67    condicion2 -> empty
+Rule 68    exp -> term exp2
+Rule 69    exp2 -> empty
+Rule 70    exp2 -> PLUS exp
+Rule 71    exp2 -> MINUS exp
+Rule 72    term -> factor term2
+Rule 73    term2 -> empty
+Rule 74    term2 -> TIMES term
+Rule 75    term2 -> DIVIDE term
+Rule 76    factor -> LPAREN expresion RPAREN
+Rule 77    factor -> PLUS data
+Rule 78    factor -> MINUS data
+Rule 79    factor -> data
+Rule 80    escritura -> WRITE LPAREN interior RPAREN
+Rule 81    interior -> expresion escritura2
+Rule 82    interior -> CHARACTER escritura2
+Rule 83    escritura2 -> COMMA interior
+Rule 84    escritura2 -> empty
+Rule 85    read -> READ LPAREN read2 RPAREN
+Rule 86    read2 -> CHARACTER
+Rule 87    read2 -> empty
+Rule 88    func -> FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA
+Rule 89    functipo -> type
+Rule 90    functipo -> VOID
+Rule 91    funcargs -> args
+Rule 92    funcargs -> empty
+Rule 93    funcest -> estatuto funcest
+Rule 94    funcest -> empty
+Rule 95    funcvars -> vars funcvars
+Rule 96    funcvars -> empty
+Rule 97    ciclo -> FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+Rule 98    ciclo1 -> asignacion
+Rule 99    ciclo1 -> empty
+Rule 100   empty -> <empty>
+
+Terminals, with rules where they appear
+
+AND                  : 24
+BOOL                 : 17
+CHAR                 : 18
+CHARACTER            : 40 82 86
+COLON                : 
+COMMA                : 13 58 63 83
+DIVIDE               : 75
+ELSE                 : 66
+EQUALS               : 38
+FOR                  : 97
+FUNCTION             : 88
+ID                   : 1 48 54 57 60 88
+IF                   : 65
+INT                  : 19
+INTEGER              : 42
+LBRA                 : 6 14 88
+LOGICAL              : 41
+LPAREN               : 50 60 65 76 80 85 88 97
+LSBRA                : 49 52 55
+MAIN                 : 6
+MINUS                : 71 78
+NOT                  : 22
+NUM                  : 20
+NUMERIC              : 39
+OR                   : 25
+PLUS                 : 70 77
+PROGRAM              : 1
+RBRA                 : 6 14 88
+READ                 : 85
+RELOP                : 29
+RETURN               : 45
+RPAREN               : 50 60 65 76 80 85 88 97
+RSBRA                : 49 52 55
+SEMICOLON            : 1 11 30 38 97 97
+TIMES                : 74
+VAR                  : 
+VOID                 : 90
+WRITE                : 80
+error                : 
+
+Nonterminals, with rules where they appear
+
+args                 : 58 91
+args2                : 57
+asignacion           : 34 97 98
+bloque               : 65 66 97
+bloque2              : 14 16
+ciclo                : 32
+ciclo1               : 97
+condicion            : 31
+condicion2           : 65
+data                 : 77 78 79
+empty                : 3 5 8 10 12 15 23 26 28 47 51 53 56 59 62 64 67 69 73 84 87 92 94 96 99
+escritura            : 36
+escritura2           : 81 82
+estatuto             : 7 16 93
+estatuto2            : 30
+exlog                : 24 25 38 46 65 97
+exlog2               : 21
+exlog3               : 21
+exp                  : 27 29 49 50 52 55 61 63 70 71
+exp2                 : 68
+expresion            : 21 76 81
+expresion2           : 27
+factor               : 72
+func                 : 4
+funcargs             : 88
+funccall             : 33 44
+funccall2            : 60
+funccall3            : 61 63
+funcest              : 88 93
+functipo             : 88
+funcvars             : 88 95
+idmv                 : 11 13 38 43
+idmv2                : 54
+idmvf                : 
+idmvf2               : 48
+idmvf3               : 49 55
+interior             : 80 83
+main                 : 1
+main2                : 6 7
+mainvars             : 6 9
+programa             : 0
+programa2            : 1 2
+programa3            : 1 4
+read                 : 35
+read2                : 85
+return               : 37
+return2              : 45
+term                 : 68 74 75
+term2                : 72
+type                 : 11 57 89
+vars                 : 2 9 95
+vars2                : 11 13
+
+Parsing method: LALR
+
+state 0
+
+    (0) S' -> . programa
+    (1) programa -> . PROGRAM ID SEMICOLON programa2 programa3 main
+
+    PROGRAM         shift and go to state 2
+
+    programa                       shift and go to state 1
+
+state 1
+
+    (0) S' -> programa .
+
+
+
+state 2
+
+    (1) programa -> PROGRAM . ID SEMICOLON programa2 programa3 main
+
+    ID              shift and go to state 3
+
+
+state 3
+
+    (1) programa -> PROGRAM ID . SEMICOLON programa2 programa3 main
+
+    SEMICOLON       shift and go to state 4
+
+
+state 4
+
+    (1) programa -> PROGRAM ID SEMICOLON . programa2 programa3 main
+    (2) programa2 -> . vars programa2
+    (3) programa2 -> . empty
+    (11) vars -> . type idmv vars2 SEMICOLON
+    (100) empty -> .
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    FUNCTION        reduce using rule 100 (empty -> .)
+    MAIN            reduce using rule 100 (empty -> .)
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    programa2                      shift and go to state 5
+    vars                           shift and go to state 6
+    empty                          shift and go to state 7
+    type                           shift and go to state 8
+
+state 5
+
+    (1) programa -> PROGRAM ID SEMICOLON programa2 . programa3 main
+    (4) programa3 -> . func programa3
+    (5) programa3 -> . empty
+    (88) func -> . FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA
+    (100) empty -> .
+
+    FUNCTION        shift and go to state 16
+    MAIN            reduce using rule 100 (empty -> .)
+
+    programa3                      shift and go to state 13
+    func                           shift and go to state 14
+    empty                          shift and go to state 15
+
+state 6
+
+    (2) programa2 -> vars . programa2
+    (2) programa2 -> . vars programa2
+    (3) programa2 -> . empty
+    (11) vars -> . type idmv vars2 SEMICOLON
+    (100) empty -> .
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    FUNCTION        reduce using rule 100 (empty -> .)
+    MAIN            reduce using rule 100 (empty -> .)
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    vars                           shift and go to state 6
+    programa2                      shift and go to state 17
+    empty                          shift and go to state 7
+    type                           shift and go to state 8
+
+state 7
+
+    (3) programa2 -> empty .
+
+    FUNCTION        reduce using rule 3 (programa2 -> empty .)
+    MAIN            reduce using rule 3 (programa2 -> empty .)
+
+
+state 8
+
+    (11) vars -> type . idmv vars2 SEMICOLON
+    (54) idmv -> . ID idmv2
+
+    ID              shift and go to state 19
+
+    idmv                           shift and go to state 18
+
+state 9
+
+    (17) type -> BOOL .
+
+    ID              reduce using rule 17 (type -> BOOL .)
+
+
+state 10
+
+    (18) type -> CHAR .
+
+    ID              reduce using rule 18 (type -> CHAR .)
+
+
+state 11
+
+    (19) type -> INT .
+
+    ID              reduce using rule 19 (type -> INT .)
+
+
+state 12
+
+    (20) type -> NUM .
+
+    ID              reduce using rule 20 (type -> NUM .)
+
+
+state 13
+
+    (1) programa -> PROGRAM ID SEMICOLON programa2 programa3 . main
+    (6) main -> . MAIN LBRA mainvars main2 RBRA
+
+    MAIN            shift and go to state 21
+
+    main                           shift and go to state 20
+
+state 14
+
+    (4) programa3 -> func . programa3
+    (4) programa3 -> . func programa3
+    (5) programa3 -> . empty
+    (88) func -> . FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA
+    (100) empty -> .
+
+    FUNCTION        shift and go to state 16
+    MAIN            reduce using rule 100 (empty -> .)
+
+    func                           shift and go to state 14
+    programa3                      shift and go to state 22
+    empty                          shift and go to state 15
+
+state 15
+
+    (5) programa3 -> empty .
+
+    MAIN            reduce using rule 5 (programa3 -> empty .)
+
+
+state 16
+
+    (88) func -> FUNCTION . functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA
+    (89) functipo -> . type
+    (90) functipo -> . VOID
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    VOID            shift and go to state 25
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    functipo                       shift and go to state 23
+    type                           shift and go to state 24
+
+state 17
+
+    (2) programa2 -> vars programa2 .
+
+    FUNCTION        reduce using rule 2 (programa2 -> vars programa2 .)
+    MAIN            reduce using rule 2 (programa2 -> vars programa2 .)
+
+
+state 18
+
+    (11) vars -> type idmv . vars2 SEMICOLON
+    (12) vars2 -> . empty
+    (13) vars2 -> . COMMA idmv vars2
+    (100) empty -> .
+
+    COMMA           shift and go to state 28
+    SEMICOLON       reduce using rule 100 (empty -> .)
+
+    vars2                          shift and go to state 26
+    empty                          shift and go to state 27
+
+state 19
+
+    (54) idmv -> ID . idmv2
+    (55) idmv2 -> . LSBRA exp RSBRA idmvf3
+    (56) idmv2 -> . empty
+    (100) empty -> .
+
+    LSBRA           shift and go to state 30
+    COMMA           reduce using rule 100 (empty -> .)
+    SEMICOLON       reduce using rule 100 (empty -> .)
+    EQUALS          reduce using rule 100 (empty -> .)
+
+    idmv2                          shift and go to state 29
+    empty                          shift and go to state 31
+
+state 20
+
+    (1) programa -> PROGRAM ID SEMICOLON programa2 programa3 main .
+
+    $end            reduce using rule 1 (programa -> PROGRAM ID SEMICOLON programa2 programa3 main .)
+
+
+state 21
+
+    (6) main -> MAIN . LBRA mainvars main2 RBRA
+
+    LBRA            shift and go to state 32
+
+
+state 22
+
+    (4) programa3 -> func programa3 .
+
+    MAIN            reduce using rule 4 (programa3 -> func programa3 .)
+
+
+state 23
+
+    (88) func -> FUNCTION functipo . ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA
+
+    ID              shift and go to state 33
+
+
+state 24
+
+    (89) functipo -> type .
+
+    ID              reduce using rule 89 (functipo -> type .)
+
+
+state 25
+
+    (90) functipo -> VOID .
+
+    ID              reduce using rule 90 (functipo -> VOID .)
+
+
+state 26
+
+    (11) vars -> type idmv vars2 . SEMICOLON
+
+    SEMICOLON       shift and go to state 34
+
+
+state 27
+
+    (12) vars2 -> empty .
+
+    SEMICOLON       reduce using rule 12 (vars2 -> empty .)
+
+
+state 28
+
+    (13) vars2 -> COMMA . idmv vars2
+    (54) idmv -> . ID idmv2
+
+    ID              shift and go to state 19
+
+    idmv                           shift and go to state 35
+
+state 29
+
+    (54) idmv -> ID idmv2 .
+
+    COMMA           reduce using rule 54 (idmv -> ID idmv2 .)
+    SEMICOLON       reduce using rule 54 (idmv -> ID idmv2 .)
+    TIMES           reduce using rule 54 (idmv -> ID idmv2 .)
+    DIVIDE          reduce using rule 54 (idmv -> ID idmv2 .)
+    PLUS            reduce using rule 54 (idmv -> ID idmv2 .)
+    MINUS           reduce using rule 54 (idmv -> ID idmv2 .)
+    RSBRA           reduce using rule 54 (idmv -> ID idmv2 .)
+    RELOP           reduce using rule 54 (idmv -> ID idmv2 .)
+    RPAREN          reduce using rule 54 (idmv -> ID idmv2 .)
+    AND             reduce using rule 54 (idmv -> ID idmv2 .)
+    OR              reduce using rule 54 (idmv -> ID idmv2 .)
+    EQUALS          reduce using rule 54 (idmv -> ID idmv2 .)
+
+
+state 30
+
+    (55) idmv2 -> LSBRA . exp RSBRA idmvf3
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    exp                            shift and go to state 36
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 31
+
+    (56) idmv2 -> empty .
+
+    COMMA           reduce using rule 56 (idmv2 -> empty .)
+    SEMICOLON       reduce using rule 56 (idmv2 -> empty .)
+    EQUALS          reduce using rule 56 (idmv2 -> empty .)
+    TIMES           reduce using rule 56 (idmv2 -> empty .)
+    DIVIDE          reduce using rule 56 (idmv2 -> empty .)
+    PLUS            reduce using rule 56 (idmv2 -> empty .)
+    MINUS           reduce using rule 56 (idmv2 -> empty .)
+    RSBRA           reduce using rule 56 (idmv2 -> empty .)
+    RELOP           reduce using rule 56 (idmv2 -> empty .)
+    RPAREN          reduce using rule 56 (idmv2 -> empty .)
+    AND             reduce using rule 56 (idmv2 -> empty .)
+    OR              reduce using rule 56 (idmv2 -> empty .)
+
+
+state 32
+
+    (6) main -> MAIN LBRA . mainvars main2 RBRA
+    (9) mainvars -> . vars mainvars
+    (10) mainvars -> . empty
+    (11) vars -> . type idmv vars2 SEMICOLON
+    (100) empty -> .
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    IF              reduce using rule 100 (empty -> .)
+    FOR             reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+    READ            reduce using rule 100 (empty -> .)
+    WRITE           reduce using rule 100 (empty -> .)
+    RETURN          reduce using rule 100 (empty -> .)
+    RBRA            reduce using rule 100 (empty -> .)
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    mainvars                       shift and go to state 50
+    vars                           shift and go to state 51
+    empty                          shift and go to state 52
+    type                           shift and go to state 8
+
+state 33
+
+    (88) func -> FUNCTION functipo ID . LPAREN funcargs RPAREN LBRA funcvars funcest RBRA
+
+    LPAREN          shift and go to state 53
+
+
+state 34
+
+    (11) vars -> type idmv vars2 SEMICOLON .
+
+    BOOL            reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    CHAR            reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    INT             reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    NUM             reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    FUNCTION        reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    MAIN            reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    IF              reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    FOR             reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    ID              reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    READ            reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    WRITE           reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    RETURN          reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+    RBRA            reduce using rule 11 (vars -> type idmv vars2 SEMICOLON .)
+
+
+state 35
+
+    (13) vars2 -> COMMA idmv . vars2
+    (12) vars2 -> . empty
+    (13) vars2 -> . COMMA idmv vars2
+    (100) empty -> .
+
+    COMMA           shift and go to state 28
+    SEMICOLON       reduce using rule 100 (empty -> .)
+
+    vars2                          shift and go to state 54
+    empty                          shift and go to state 27
+
+state 36
+
+    (55) idmv2 -> LSBRA exp . RSBRA idmvf3
+
+    RSBRA           shift and go to state 55
+
+
+state 37
+
+    (68) exp -> term . exp2
+    (69) exp2 -> . empty
+    (70) exp2 -> . PLUS exp
+    (71) exp2 -> . MINUS exp
+    (100) empty -> .
+
+    PLUS            shift and go to state 58
+    MINUS           shift and go to state 59
+    RSBRA           reduce using rule 100 (empty -> .)
+    RELOP           reduce using rule 100 (empty -> .)
+    RPAREN          reduce using rule 100 (empty -> .)
+    COMMA           reduce using rule 100 (empty -> .)
+    AND             reduce using rule 100 (empty -> .)
+    OR              reduce using rule 100 (empty -> .)
+    SEMICOLON       reduce using rule 100 (empty -> .)
+
+    exp2                           shift and go to state 56
+    empty                          shift and go to state 57
+
+state 38
+
+    (72) term -> factor . term2
+    (73) term2 -> . empty
+    (74) term2 -> . TIMES term
+    (75) term2 -> . DIVIDE term
+    (100) empty -> .
+
+    TIMES           shift and go to state 62
+    DIVIDE          shift and go to state 63
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    RSBRA           reduce using rule 100 (empty -> .)
+    RELOP           reduce using rule 100 (empty -> .)
+    RPAREN          reduce using rule 100 (empty -> .)
+    COMMA           reduce using rule 100 (empty -> .)
+    AND             reduce using rule 100 (empty -> .)
+    OR              reduce using rule 100 (empty -> .)
+    SEMICOLON       reduce using rule 100 (empty -> .)
+
+    term2                          shift and go to state 60
+    empty                          shift and go to state 61
+
+state 39
+
+    (76) factor -> LPAREN . expresion RPAREN
+    (27) expresion -> . exp expresion2
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    expresion                      shift and go to state 64
+    exp                            shift and go to state 65
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 40
+
+    (77) factor -> PLUS . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    data                           shift and go to state 66
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 41
+
+    (79) factor -> data .
+
+    TIMES           reduce using rule 79 (factor -> data .)
+    DIVIDE          reduce using rule 79 (factor -> data .)
+    PLUS            reduce using rule 79 (factor -> data .)
+    MINUS           reduce using rule 79 (factor -> data .)
+    RSBRA           reduce using rule 79 (factor -> data .)
+    RELOP           reduce using rule 79 (factor -> data .)
+    RPAREN          reduce using rule 79 (factor -> data .)
+    COMMA           reduce using rule 79 (factor -> data .)
+    AND             reduce using rule 79 (factor -> data .)
+    OR              reduce using rule 79 (factor -> data .)
+    SEMICOLON       reduce using rule 79 (factor -> data .)
+
+
+state 42
+
+    (78) factor -> MINUS . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    data                           shift and go to state 67
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 43
+
+    (39) data -> NUMERIC .
+
+    TIMES           reduce using rule 39 (data -> NUMERIC .)
+    DIVIDE          reduce using rule 39 (data -> NUMERIC .)
+    PLUS            reduce using rule 39 (data -> NUMERIC .)
+    MINUS           reduce using rule 39 (data -> NUMERIC .)
+    RSBRA           reduce using rule 39 (data -> NUMERIC .)
+    RELOP           reduce using rule 39 (data -> NUMERIC .)
+    RPAREN          reduce using rule 39 (data -> NUMERIC .)
+    COMMA           reduce using rule 39 (data -> NUMERIC .)
+    AND             reduce using rule 39 (data -> NUMERIC .)
+    OR              reduce using rule 39 (data -> NUMERIC .)
+    SEMICOLON       reduce using rule 39 (data -> NUMERIC .)
+
+
+state 44
+
+    (40) data -> CHARACTER .
+
+    TIMES           reduce using rule 40 (data -> CHARACTER .)
+    DIVIDE          reduce using rule 40 (data -> CHARACTER .)
+    PLUS            reduce using rule 40 (data -> CHARACTER .)
+    MINUS           reduce using rule 40 (data -> CHARACTER .)
+    RSBRA           reduce using rule 40 (data -> CHARACTER .)
+    RELOP           reduce using rule 40 (data -> CHARACTER .)
+    RPAREN          reduce using rule 40 (data -> CHARACTER .)
+    COMMA           reduce using rule 40 (data -> CHARACTER .)
+    AND             reduce using rule 40 (data -> CHARACTER .)
+    OR              reduce using rule 40 (data -> CHARACTER .)
+    SEMICOLON       reduce using rule 40 (data -> CHARACTER .)
+
+
+state 45
+
+    (41) data -> LOGICAL .
+
+    TIMES           reduce using rule 41 (data -> LOGICAL .)
+    DIVIDE          reduce using rule 41 (data -> LOGICAL .)
+    PLUS            reduce using rule 41 (data -> LOGICAL .)
+    MINUS           reduce using rule 41 (data -> LOGICAL .)
+    RSBRA           reduce using rule 41 (data -> LOGICAL .)
+    RELOP           reduce using rule 41 (data -> LOGICAL .)
+    RPAREN          reduce using rule 41 (data -> LOGICAL .)
+    COMMA           reduce using rule 41 (data -> LOGICAL .)
+    AND             reduce using rule 41 (data -> LOGICAL .)
+    OR              reduce using rule 41 (data -> LOGICAL .)
+    SEMICOLON       reduce using rule 41 (data -> LOGICAL .)
+
+
+state 46
+
+    (42) data -> INTEGER .
+
+    TIMES           reduce using rule 42 (data -> INTEGER .)
+    DIVIDE          reduce using rule 42 (data -> INTEGER .)
+    PLUS            reduce using rule 42 (data -> INTEGER .)
+    MINUS           reduce using rule 42 (data -> INTEGER .)
+    RSBRA           reduce using rule 42 (data -> INTEGER .)
+    RELOP           reduce using rule 42 (data -> INTEGER .)
+    RPAREN          reduce using rule 42 (data -> INTEGER .)
+    COMMA           reduce using rule 42 (data -> INTEGER .)
+    AND             reduce using rule 42 (data -> INTEGER .)
+    OR              reduce using rule 42 (data -> INTEGER .)
+    SEMICOLON       reduce using rule 42 (data -> INTEGER .)
+
+
+state 47
+
+    (43) data -> idmv .
+
+    TIMES           reduce using rule 43 (data -> idmv .)
+    DIVIDE          reduce using rule 43 (data -> idmv .)
+    PLUS            reduce using rule 43 (data -> idmv .)
+    MINUS           reduce using rule 43 (data -> idmv .)
+    RSBRA           reduce using rule 43 (data -> idmv .)
+    RELOP           reduce using rule 43 (data -> idmv .)
+    RPAREN          reduce using rule 43 (data -> idmv .)
+    COMMA           reduce using rule 43 (data -> idmv .)
+    AND             reduce using rule 43 (data -> idmv .)
+    OR              reduce using rule 43 (data -> idmv .)
+    SEMICOLON       reduce using rule 43 (data -> idmv .)
+
+
+state 48
+
+    (44) data -> funccall .
+
+    TIMES           reduce using rule 44 (data -> funccall .)
+    DIVIDE          reduce using rule 44 (data -> funccall .)
+    PLUS            reduce using rule 44 (data -> funccall .)
+    MINUS           reduce using rule 44 (data -> funccall .)
+    RSBRA           reduce using rule 44 (data -> funccall .)
+    RELOP           reduce using rule 44 (data -> funccall .)
+    RPAREN          reduce using rule 44 (data -> funccall .)
+    COMMA           reduce using rule 44 (data -> funccall .)
+    AND             reduce using rule 44 (data -> funccall .)
+    OR              reduce using rule 44 (data -> funccall .)
+    SEMICOLON       reduce using rule 44 (data -> funccall .)
+
+
+state 49
+
+    (54) idmv -> ID . idmv2
+    (60) funccall -> ID . LPAREN funccall2 RPAREN
+    (55) idmv2 -> . LSBRA exp RSBRA idmvf3
+    (56) idmv2 -> . empty
+    (100) empty -> .
+
+    LPAREN          shift and go to state 68
+    LSBRA           shift and go to state 30
+    TIMES           reduce using rule 100 (empty -> .)
+    DIVIDE          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    RSBRA           reduce using rule 100 (empty -> .)
+    RELOP           reduce using rule 100 (empty -> .)
+    RPAREN          reduce using rule 100 (empty -> .)
+    COMMA           reduce using rule 100 (empty -> .)
+    AND             reduce using rule 100 (empty -> .)
+    OR              reduce using rule 100 (empty -> .)
+    SEMICOLON       reduce using rule 100 (empty -> .)
+
+    idmv2                          shift and go to state 29
+    empty                          shift and go to state 31
+
+state 50
+
+    (6) main -> MAIN LBRA mainvars . main2 RBRA
+    (7) main2 -> . estatuto main2
+    (8) main2 -> . empty
+    (30) estatuto -> . estatuto2 SEMICOLON
+    (100) empty -> .
+    (31) estatuto2 -> . condicion
+    (32) estatuto2 -> . ciclo
+    (33) estatuto2 -> . funccall
+    (34) estatuto2 -> . asignacion
+    (35) estatuto2 -> . read
+    (36) estatuto2 -> . escritura
+    (37) estatuto2 -> . return
+    (65) condicion -> . IF LPAREN exlog RPAREN bloque condicion2
+    (97) ciclo -> . FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (85) read -> . READ LPAREN read2 RPAREN
+    (80) escritura -> . WRITE LPAREN interior RPAREN
+    (45) return -> . RETURN return2
+    (54) idmv -> . ID idmv2
+
+    RBRA            reduce using rule 100 (empty -> .)
+    IF              shift and go to state 80
+    FOR             shift and go to state 81
+    ID              shift and go to state 82
+    READ            shift and go to state 84
+    WRITE           shift and go to state 85
+    RETURN          shift and go to state 86
+
+    main2                          shift and go to state 69
+    estatuto                       shift and go to state 70
+    empty                          shift and go to state 71
+    estatuto2                      shift and go to state 72
+    condicion                      shift and go to state 73
+    ciclo                          shift and go to state 74
+    funccall                       shift and go to state 75
+    asignacion                     shift and go to state 76
+    read                           shift and go to state 77
+    escritura                      shift and go to state 78
+    return                         shift and go to state 79
+    idmv                           shift and go to state 83
+
+state 51
+
+    (9) mainvars -> vars . mainvars
+    (9) mainvars -> . vars mainvars
+    (10) mainvars -> . empty
+    (11) vars -> . type idmv vars2 SEMICOLON
+    (100) empty -> .
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    IF              reduce using rule 100 (empty -> .)
+    FOR             reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+    READ            reduce using rule 100 (empty -> .)
+    WRITE           reduce using rule 100 (empty -> .)
+    RETURN          reduce using rule 100 (empty -> .)
+    RBRA            reduce using rule 100 (empty -> .)
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    vars                           shift and go to state 51
+    mainvars                       shift and go to state 87
+    empty                          shift and go to state 52
+    type                           shift and go to state 8
+
+state 52
+
+    (10) mainvars -> empty .
+
+    IF              reduce using rule 10 (mainvars -> empty .)
+    FOR             reduce using rule 10 (mainvars -> empty .)
+    ID              reduce using rule 10 (mainvars -> empty .)
+    READ            reduce using rule 10 (mainvars -> empty .)
+    WRITE           reduce using rule 10 (mainvars -> empty .)
+    RETURN          reduce using rule 10 (mainvars -> empty .)
+    RBRA            reduce using rule 10 (mainvars -> empty .)
+
+
+state 53
+
+    (88) func -> FUNCTION functipo ID LPAREN . funcargs RPAREN LBRA funcvars funcest RBRA
+    (91) funcargs -> . args
+    (92) funcargs -> . empty
+    (57) args -> . type ID args2
+    (100) empty -> .
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    RPAREN          reduce using rule 100 (empty -> .)
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    funcargs                       shift and go to state 88
+    args                           shift and go to state 89
+    empty                          shift and go to state 90
+    type                           shift and go to state 91
+
+state 54
+
+    (13) vars2 -> COMMA idmv vars2 .
+
+    SEMICOLON       reduce using rule 13 (vars2 -> COMMA idmv vars2 .)
+
+
+state 55
+
+    (55) idmv2 -> LSBRA exp RSBRA . idmvf3
+    (52) idmvf3 -> . LSBRA exp RSBRA
+    (53) idmvf3 -> . empty
+    (100) empty -> .
+
+    LSBRA           shift and go to state 92
+    COMMA           reduce using rule 100 (empty -> .)
+    SEMICOLON       reduce using rule 100 (empty -> .)
+    EQUALS          reduce using rule 100 (empty -> .)
+    TIMES           reduce using rule 100 (empty -> .)
+    DIVIDE          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    RSBRA           reduce using rule 100 (empty -> .)
+    RELOP           reduce using rule 100 (empty -> .)
+    RPAREN          reduce using rule 100 (empty -> .)
+    AND             reduce using rule 100 (empty -> .)
+    OR              reduce using rule 100 (empty -> .)
+
+    idmvf3                         shift and go to state 93
+    empty                          shift and go to state 94
+
+state 56
+
+    (68) exp -> term exp2 .
+
+    RSBRA           reduce using rule 68 (exp -> term exp2 .)
+    RELOP           reduce using rule 68 (exp -> term exp2 .)
+    RPAREN          reduce using rule 68 (exp -> term exp2 .)
+    COMMA           reduce using rule 68 (exp -> term exp2 .)
+    AND             reduce using rule 68 (exp -> term exp2 .)
+    OR              reduce using rule 68 (exp -> term exp2 .)
+    SEMICOLON       reduce using rule 68 (exp -> term exp2 .)
+
+
+state 57
+
+    (69) exp2 -> empty .
+
+    RSBRA           reduce using rule 69 (exp2 -> empty .)
+    RELOP           reduce using rule 69 (exp2 -> empty .)
+    RPAREN          reduce using rule 69 (exp2 -> empty .)
+    COMMA           reduce using rule 69 (exp2 -> empty .)
+    AND             reduce using rule 69 (exp2 -> empty .)
+    OR              reduce using rule 69 (exp2 -> empty .)
+    SEMICOLON       reduce using rule 69 (exp2 -> empty .)
+
+
+state 58
+
+    (70) exp2 -> PLUS . exp
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    exp                            shift and go to state 95
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 59
+
+    (71) exp2 -> MINUS . exp
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    exp                            shift and go to state 96
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 60
+
+    (72) term -> factor term2 .
+
+    PLUS            reduce using rule 72 (term -> factor term2 .)
+    MINUS           reduce using rule 72 (term -> factor term2 .)
+    RSBRA           reduce using rule 72 (term -> factor term2 .)
+    RELOP           reduce using rule 72 (term -> factor term2 .)
+    RPAREN          reduce using rule 72 (term -> factor term2 .)
+    COMMA           reduce using rule 72 (term -> factor term2 .)
+    AND             reduce using rule 72 (term -> factor term2 .)
+    OR              reduce using rule 72 (term -> factor term2 .)
+    SEMICOLON       reduce using rule 72 (term -> factor term2 .)
+
+
+state 61
+
+    (73) term2 -> empty .
+
+    PLUS            reduce using rule 73 (term2 -> empty .)
+    MINUS           reduce using rule 73 (term2 -> empty .)
+    RSBRA           reduce using rule 73 (term2 -> empty .)
+    RELOP           reduce using rule 73 (term2 -> empty .)
+    RPAREN          reduce using rule 73 (term2 -> empty .)
+    COMMA           reduce using rule 73 (term2 -> empty .)
+    AND             reduce using rule 73 (term2 -> empty .)
+    OR              reduce using rule 73 (term2 -> empty .)
+    SEMICOLON       reduce using rule 73 (term2 -> empty .)
+
+
+state 62
+
+    (74) term2 -> TIMES . term
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    term                           shift and go to state 97
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 63
+
+    (75) term2 -> DIVIDE . term
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    term                           shift and go to state 98
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 64
+
+    (76) factor -> LPAREN expresion . RPAREN
+
+    RPAREN          shift and go to state 99
+
+
+state 65
+
+    (27) expresion -> exp . expresion2
+    (28) expresion2 -> . empty
+    (29) expresion2 -> . RELOP exp
+    (100) empty -> .
+
+    RELOP           shift and go to state 102
+    RPAREN          reduce using rule 100 (empty -> .)
+    COMMA           reduce using rule 100 (empty -> .)
+    AND             reduce using rule 100 (empty -> .)
+    OR              reduce using rule 100 (empty -> .)
+    SEMICOLON       reduce using rule 100 (empty -> .)
+
+    expresion2                     shift and go to state 100
+    empty                          shift and go to state 101
+
+state 66
+
+    (77) factor -> PLUS data .
+
+    TIMES           reduce using rule 77 (factor -> PLUS data .)
+    DIVIDE          reduce using rule 77 (factor -> PLUS data .)
+    PLUS            reduce using rule 77 (factor -> PLUS data .)
+    MINUS           reduce using rule 77 (factor -> PLUS data .)
+    RSBRA           reduce using rule 77 (factor -> PLUS data .)
+    RELOP           reduce using rule 77 (factor -> PLUS data .)
+    RPAREN          reduce using rule 77 (factor -> PLUS data .)
+    COMMA           reduce using rule 77 (factor -> PLUS data .)
+    AND             reduce using rule 77 (factor -> PLUS data .)
+    OR              reduce using rule 77 (factor -> PLUS data .)
+    SEMICOLON       reduce using rule 77 (factor -> PLUS data .)
+
+
+state 67
+
+    (78) factor -> MINUS data .
+
+    TIMES           reduce using rule 78 (factor -> MINUS data .)
+    DIVIDE          reduce using rule 78 (factor -> MINUS data .)
+    PLUS            reduce using rule 78 (factor -> MINUS data .)
+    MINUS           reduce using rule 78 (factor -> MINUS data .)
+    RSBRA           reduce using rule 78 (factor -> MINUS data .)
+    RELOP           reduce using rule 78 (factor -> MINUS data .)
+    RPAREN          reduce using rule 78 (factor -> MINUS data .)
+    COMMA           reduce using rule 78 (factor -> MINUS data .)
+    AND             reduce using rule 78 (factor -> MINUS data .)
+    OR              reduce using rule 78 (factor -> MINUS data .)
+    SEMICOLON       reduce using rule 78 (factor -> MINUS data .)
+
+
+state 68
+
+    (60) funccall -> ID LPAREN . funccall2 RPAREN
+    (61) funccall2 -> . exp funccall3
+    (62) funccall2 -> . empty
+    (68) exp -> . term exp2
+    (100) empty -> .
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    RPAREN          reduce using rule 100 (empty -> .)
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    funccall2                      shift and go to state 103
+    exp                            shift and go to state 104
+    empty                          shift and go to state 105
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 69
+
+    (6) main -> MAIN LBRA mainvars main2 . RBRA
+
+    RBRA            shift and go to state 106
+
+
+state 70
+
+    (7) main2 -> estatuto . main2
+    (7) main2 -> . estatuto main2
+    (8) main2 -> . empty
+    (30) estatuto -> . estatuto2 SEMICOLON
+    (100) empty -> .
+    (31) estatuto2 -> . condicion
+    (32) estatuto2 -> . ciclo
+    (33) estatuto2 -> . funccall
+    (34) estatuto2 -> . asignacion
+    (35) estatuto2 -> . read
+    (36) estatuto2 -> . escritura
+    (37) estatuto2 -> . return
+    (65) condicion -> . IF LPAREN exlog RPAREN bloque condicion2
+    (97) ciclo -> . FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (85) read -> . READ LPAREN read2 RPAREN
+    (80) escritura -> . WRITE LPAREN interior RPAREN
+    (45) return -> . RETURN return2
+    (54) idmv -> . ID idmv2
+
+    RBRA            reduce using rule 100 (empty -> .)
+    IF              shift and go to state 80
+    FOR             shift and go to state 81
+    ID              shift and go to state 82
+    READ            shift and go to state 84
+    WRITE           shift and go to state 85
+    RETURN          shift and go to state 86
+
+    estatuto                       shift and go to state 70
+    main2                          shift and go to state 107
+    empty                          shift and go to state 71
+    estatuto2                      shift and go to state 72
+    condicion                      shift and go to state 73
+    ciclo                          shift and go to state 74
+    funccall                       shift and go to state 75
+    asignacion                     shift and go to state 76
+    read                           shift and go to state 77
+    escritura                      shift and go to state 78
+    return                         shift and go to state 79
+    idmv                           shift and go to state 83
+
+state 71
+
+    (8) main2 -> empty .
+
+    RBRA            reduce using rule 8 (main2 -> empty .)
+
+
+state 72
+
+    (30) estatuto -> estatuto2 . SEMICOLON
+
+    SEMICOLON       shift and go to state 108
+
+
+state 73
+
+    (31) estatuto2 -> condicion .
+
+    SEMICOLON       reduce using rule 31 (estatuto2 -> condicion .)
+
+
+state 74
+
+    (32) estatuto2 -> ciclo .
+
+    SEMICOLON       reduce using rule 32 (estatuto2 -> ciclo .)
+
+
+state 75
+
+    (33) estatuto2 -> funccall .
+
+    SEMICOLON       reduce using rule 33 (estatuto2 -> funccall .)
+
+
+state 76
+
+    (34) estatuto2 -> asignacion .
+
+    SEMICOLON       reduce using rule 34 (estatuto2 -> asignacion .)
+
+
+state 77
+
+    (35) estatuto2 -> read .
+
+    SEMICOLON       reduce using rule 35 (estatuto2 -> read .)
+
+
+state 78
+
+    (36) estatuto2 -> escritura .
+
+    SEMICOLON       reduce using rule 36 (estatuto2 -> escritura .)
+
+
+state 79
+
+    (37) estatuto2 -> return .
+
+    SEMICOLON       reduce using rule 37 (estatuto2 -> return .)
+
+
+state 80
+
+    (65) condicion -> IF . LPAREN exlog RPAREN bloque condicion2
+
+    LPAREN          shift and go to state 109
+
+
+state 81
+
+    (97) ciclo -> FOR . LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+
+    LPAREN          shift and go to state 110
+
+
+state 82
+
+    (60) funccall -> ID . LPAREN funccall2 RPAREN
+    (54) idmv -> ID . idmv2
+    (55) idmv2 -> . LSBRA exp RSBRA idmvf3
+    (56) idmv2 -> . empty
+    (100) empty -> .
+
+    LPAREN          shift and go to state 68
+    LSBRA           shift and go to state 30
+    EQUALS          reduce using rule 100 (empty -> .)
+
+    idmv2                          shift and go to state 29
+    empty                          shift and go to state 31
+
+state 83
+
+    (38) asignacion -> idmv . EQUALS exlog SEMICOLON
+
+    EQUALS          shift and go to state 111
+
+
+state 84
+
+    (85) read -> READ . LPAREN read2 RPAREN
+
+    LPAREN          shift and go to state 112
+
+
+state 85
+
+    (80) escritura -> WRITE . LPAREN interior RPAREN
+
+    LPAREN          shift and go to state 113
+
+
+state 86
+
+    (45) return -> RETURN . return2
+    (46) return2 -> . exlog
+    (47) return2 -> . empty
+    (21) exlog -> . exlog2 expresion exlog3
+    (100) empty -> .
+    (22) exlog2 -> . NOT
+    (23) exlog2 -> . empty
+
+    SEMICOLON       reduce using rule 100 (empty -> .)
+    LPAREN          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    NUMERIC         reduce using rule 100 (empty -> .)
+    CHARACTER       reduce using rule 100 (empty -> .)
+    LOGICAL         reduce using rule 100 (empty -> .)
+    INTEGER         reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+    NOT             shift and go to state 118
+
+    return2                        shift and go to state 114
+    exlog                          shift and go to state 115
+    empty                          shift and go to state 116
+    exlog2                         shift and go to state 117
+
+state 87
+
+    (9) mainvars -> vars mainvars .
+
+    IF              reduce using rule 9 (mainvars -> vars mainvars .)
+    FOR             reduce using rule 9 (mainvars -> vars mainvars .)
+    ID              reduce using rule 9 (mainvars -> vars mainvars .)
+    READ            reduce using rule 9 (mainvars -> vars mainvars .)
+    WRITE           reduce using rule 9 (mainvars -> vars mainvars .)
+    RETURN          reduce using rule 9 (mainvars -> vars mainvars .)
+    RBRA            reduce using rule 9 (mainvars -> vars mainvars .)
+
+
+state 88
+
+    (88) func -> FUNCTION functipo ID LPAREN funcargs . RPAREN LBRA funcvars funcest RBRA
+
+    RPAREN          shift and go to state 119
+
+
+state 89
+
+    (91) funcargs -> args .
+
+    RPAREN          reduce using rule 91 (funcargs -> args .)
+
+
+state 90
+
+    (92) funcargs -> empty .
+
+    RPAREN          reduce using rule 92 (funcargs -> empty .)
+
+
+state 91
+
+    (57) args -> type . ID args2
+
+    ID              shift and go to state 120
+
+
+state 92
+
+    (52) idmvf3 -> LSBRA . exp RSBRA
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    exp                            shift and go to state 121
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 93
+
+    (55) idmv2 -> LSBRA exp RSBRA idmvf3 .
+
+    COMMA           reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    SEMICOLON       reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    EQUALS          reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    TIMES           reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    DIVIDE          reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    PLUS            reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    MINUS           reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    RSBRA           reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    RELOP           reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    RPAREN          reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    AND             reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+    OR              reduce using rule 55 (idmv2 -> LSBRA exp RSBRA idmvf3 .)
+
+
+state 94
+
+    (53) idmvf3 -> empty .
+
+    COMMA           reduce using rule 53 (idmvf3 -> empty .)
+    SEMICOLON       reduce using rule 53 (idmvf3 -> empty .)
+    EQUALS          reduce using rule 53 (idmvf3 -> empty .)
+    TIMES           reduce using rule 53 (idmvf3 -> empty .)
+    DIVIDE          reduce using rule 53 (idmvf3 -> empty .)
+    PLUS            reduce using rule 53 (idmvf3 -> empty .)
+    MINUS           reduce using rule 53 (idmvf3 -> empty .)
+    RSBRA           reduce using rule 53 (idmvf3 -> empty .)
+    RELOP           reduce using rule 53 (idmvf3 -> empty .)
+    RPAREN          reduce using rule 53 (idmvf3 -> empty .)
+    AND             reduce using rule 53 (idmvf3 -> empty .)
+    OR              reduce using rule 53 (idmvf3 -> empty .)
+
+
+state 95
+
+    (70) exp2 -> PLUS exp .
+
+    RSBRA           reduce using rule 70 (exp2 -> PLUS exp .)
+    RELOP           reduce using rule 70 (exp2 -> PLUS exp .)
+    RPAREN          reduce using rule 70 (exp2 -> PLUS exp .)
+    COMMA           reduce using rule 70 (exp2 -> PLUS exp .)
+    AND             reduce using rule 70 (exp2 -> PLUS exp .)
+    OR              reduce using rule 70 (exp2 -> PLUS exp .)
+    SEMICOLON       reduce using rule 70 (exp2 -> PLUS exp .)
+
+
+state 96
+
+    (71) exp2 -> MINUS exp .
+
+    RSBRA           reduce using rule 71 (exp2 -> MINUS exp .)
+    RELOP           reduce using rule 71 (exp2 -> MINUS exp .)
+    RPAREN          reduce using rule 71 (exp2 -> MINUS exp .)
+    COMMA           reduce using rule 71 (exp2 -> MINUS exp .)
+    AND             reduce using rule 71 (exp2 -> MINUS exp .)
+    OR              reduce using rule 71 (exp2 -> MINUS exp .)
+    SEMICOLON       reduce using rule 71 (exp2 -> MINUS exp .)
+
+
+state 97
+
+    (74) term2 -> TIMES term .
+
+    PLUS            reduce using rule 74 (term2 -> TIMES term .)
+    MINUS           reduce using rule 74 (term2 -> TIMES term .)
+    RSBRA           reduce using rule 74 (term2 -> TIMES term .)
+    RELOP           reduce using rule 74 (term2 -> TIMES term .)
+    RPAREN          reduce using rule 74 (term2 -> TIMES term .)
+    COMMA           reduce using rule 74 (term2 -> TIMES term .)
+    AND             reduce using rule 74 (term2 -> TIMES term .)
+    OR              reduce using rule 74 (term2 -> TIMES term .)
+    SEMICOLON       reduce using rule 74 (term2 -> TIMES term .)
+
+
+state 98
+
+    (75) term2 -> DIVIDE term .
+
+    PLUS            reduce using rule 75 (term2 -> DIVIDE term .)
+    MINUS           reduce using rule 75 (term2 -> DIVIDE term .)
+    RSBRA           reduce using rule 75 (term2 -> DIVIDE term .)
+    RELOP           reduce using rule 75 (term2 -> DIVIDE term .)
+    RPAREN          reduce using rule 75 (term2 -> DIVIDE term .)
+    COMMA           reduce using rule 75 (term2 -> DIVIDE term .)
+    AND             reduce using rule 75 (term2 -> DIVIDE term .)
+    OR              reduce using rule 75 (term2 -> DIVIDE term .)
+    SEMICOLON       reduce using rule 75 (term2 -> DIVIDE term .)
+
+
+state 99
+
+    (76) factor -> LPAREN expresion RPAREN .
+
+    TIMES           reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    DIVIDE          reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    PLUS            reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    MINUS           reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    RSBRA           reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    RELOP           reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    RPAREN          reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    COMMA           reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    AND             reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    OR              reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+    SEMICOLON       reduce using rule 76 (factor -> LPAREN expresion RPAREN .)
+
+
+state 100
+
+    (27) expresion -> exp expresion2 .
+
+    RPAREN          reduce using rule 27 (expresion -> exp expresion2 .)
+    COMMA           reduce using rule 27 (expresion -> exp expresion2 .)
+    AND             reduce using rule 27 (expresion -> exp expresion2 .)
+    OR              reduce using rule 27 (expresion -> exp expresion2 .)
+    SEMICOLON       reduce using rule 27 (expresion -> exp expresion2 .)
+
+
+state 101
+
+    (28) expresion2 -> empty .
+
+    RPAREN          reduce using rule 28 (expresion2 -> empty .)
+    COMMA           reduce using rule 28 (expresion2 -> empty .)
+    AND             reduce using rule 28 (expresion2 -> empty .)
+    OR              reduce using rule 28 (expresion2 -> empty .)
+    SEMICOLON       reduce using rule 28 (expresion2 -> empty .)
+
+
+state 102
+
+    (29) expresion2 -> RELOP . exp
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    exp                            shift and go to state 122
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 103
+
+    (60) funccall -> ID LPAREN funccall2 . RPAREN
+
+    RPAREN          shift and go to state 123
+
+
+state 104
+
+    (61) funccall2 -> exp . funccall3
+    (63) funccall3 -> . COMMA exp funccall3
+    (64) funccall3 -> . empty
+    (100) empty -> .
+
+    COMMA           shift and go to state 125
+    RPAREN          reduce using rule 100 (empty -> .)
+
+    funccall3                      shift and go to state 124
+    empty                          shift and go to state 126
+
+state 105
+
+    (62) funccall2 -> empty .
+
+    RPAREN          reduce using rule 62 (funccall2 -> empty .)
+
+
+state 106
+
+    (6) main -> MAIN LBRA mainvars main2 RBRA .
+
+    $end            reduce using rule 6 (main -> MAIN LBRA mainvars main2 RBRA .)
+
+
+state 107
+
+    (7) main2 -> estatuto main2 .
+
+    RBRA            reduce using rule 7 (main2 -> estatuto main2 .)
+
+
+state 108
+
+    (30) estatuto -> estatuto2 SEMICOLON .
+
+    IF              reduce using rule 30 (estatuto -> estatuto2 SEMICOLON .)
+    FOR             reduce using rule 30 (estatuto -> estatuto2 SEMICOLON .)
+    ID              reduce using rule 30 (estatuto -> estatuto2 SEMICOLON .)
+    READ            reduce using rule 30 (estatuto -> estatuto2 SEMICOLON .)
+    WRITE           reduce using rule 30 (estatuto -> estatuto2 SEMICOLON .)
+    RETURN          reduce using rule 30 (estatuto -> estatuto2 SEMICOLON .)
+    RBRA            reduce using rule 30 (estatuto -> estatuto2 SEMICOLON .)
+
+
+state 109
+
+    (65) condicion -> IF LPAREN . exlog RPAREN bloque condicion2
+    (21) exlog -> . exlog2 expresion exlog3
+    (22) exlog2 -> . NOT
+    (23) exlog2 -> . empty
+    (100) empty -> .
+
+    NOT             shift and go to state 118
+    LPAREN          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    NUMERIC         reduce using rule 100 (empty -> .)
+    CHARACTER       reduce using rule 100 (empty -> .)
+    LOGICAL         reduce using rule 100 (empty -> .)
+    INTEGER         reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+
+    exlog                          shift and go to state 127
+    exlog2                         shift and go to state 117
+    empty                          shift and go to state 128
+
+state 110
+
+    (97) ciclo -> FOR LPAREN . ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+    (98) ciclo1 -> . asignacion
+    (99) ciclo1 -> . empty
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (100) empty -> .
+    (54) idmv -> . ID idmv2
+
+    SEMICOLON       reduce using rule 100 (empty -> .)
+    ID              shift and go to state 19
+
+    ciclo1                         shift and go to state 129
+    asignacion                     shift and go to state 130
+    empty                          shift and go to state 131
+    idmv                           shift and go to state 83
+
+state 111
+
+    (38) asignacion -> idmv EQUALS . exlog SEMICOLON
+    (21) exlog -> . exlog2 expresion exlog3
+    (22) exlog2 -> . NOT
+    (23) exlog2 -> . empty
+    (100) empty -> .
+
+    NOT             shift and go to state 118
+    LPAREN          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    NUMERIC         reduce using rule 100 (empty -> .)
+    CHARACTER       reduce using rule 100 (empty -> .)
+    LOGICAL         reduce using rule 100 (empty -> .)
+    INTEGER         reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+
+    exlog                          shift and go to state 132
+    exlog2                         shift and go to state 117
+    empty                          shift and go to state 128
+
+state 112
+
+    (85) read -> READ LPAREN . read2 RPAREN
+    (86) read2 -> . CHARACTER
+    (87) read2 -> . empty
+    (100) empty -> .
+
+    CHARACTER       shift and go to state 134
+    RPAREN          reduce using rule 100 (empty -> .)
+
+    read2                          shift and go to state 133
+    empty                          shift and go to state 135
+
+state 113
+
+    (80) escritura -> WRITE LPAREN . interior RPAREN
+    (81) interior -> . expresion escritura2
+    (82) interior -> . CHARACTER escritura2
+    (27) expresion -> . exp expresion2
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    CHARACTER       shift and go to state 138
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    interior                       shift and go to state 136
+    expresion                      shift and go to state 137
+    exp                            shift and go to state 65
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 114
+
+    (45) return -> RETURN return2 .
+
+    SEMICOLON       reduce using rule 45 (return -> RETURN return2 .)
+
+
+state 115
+
+    (46) return2 -> exlog .
+
+    SEMICOLON       reduce using rule 46 (return2 -> exlog .)
+
+
+state 116
+
+    (47) return2 -> empty .
+    (23) exlog2 -> empty .
+
+    SEMICOLON       reduce using rule 47 (return2 -> empty .)
+    LPAREN          reduce using rule 23 (exlog2 -> empty .)
+    PLUS            reduce using rule 23 (exlog2 -> empty .)
+    MINUS           reduce using rule 23 (exlog2 -> empty .)
+    NUMERIC         reduce using rule 23 (exlog2 -> empty .)
+    CHARACTER       reduce using rule 23 (exlog2 -> empty .)
+    LOGICAL         reduce using rule 23 (exlog2 -> empty .)
+    INTEGER         reduce using rule 23 (exlog2 -> empty .)
+    ID              reduce using rule 23 (exlog2 -> empty .)
+
+
+state 117
+
+    (21) exlog -> exlog2 . expresion exlog3
+    (27) expresion -> . exp expresion2
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    expresion                      shift and go to state 139
+    exp                            shift and go to state 65
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 118
+
+    (22) exlog2 -> NOT .
+
+    LPAREN          reduce using rule 22 (exlog2 -> NOT .)
+    PLUS            reduce using rule 22 (exlog2 -> NOT .)
+    MINUS           reduce using rule 22 (exlog2 -> NOT .)
+    NUMERIC         reduce using rule 22 (exlog2 -> NOT .)
+    CHARACTER       reduce using rule 22 (exlog2 -> NOT .)
+    LOGICAL         reduce using rule 22 (exlog2 -> NOT .)
+    INTEGER         reduce using rule 22 (exlog2 -> NOT .)
+    ID              reduce using rule 22 (exlog2 -> NOT .)
+
+
+state 119
+
+    (88) func -> FUNCTION functipo ID LPAREN funcargs RPAREN . LBRA funcvars funcest RBRA
+
+    LBRA            shift and go to state 140
+
+
+state 120
+
+    (57) args -> type ID . args2
+    (58) args2 -> . COMMA args
+    (59) args2 -> . empty
+    (100) empty -> .
+
+    COMMA           shift and go to state 142
+    RPAREN          reduce using rule 100 (empty -> .)
+
+    args2                          shift and go to state 141
+    empty                          shift and go to state 143
+
+state 121
+
+    (52) idmvf3 -> LSBRA exp . RSBRA
+
+    RSBRA           shift and go to state 144
+
+
+state 122
+
+    (29) expresion2 -> RELOP exp .
+
+    RPAREN          reduce using rule 29 (expresion2 -> RELOP exp .)
+    COMMA           reduce using rule 29 (expresion2 -> RELOP exp .)
+    AND             reduce using rule 29 (expresion2 -> RELOP exp .)
+    OR              reduce using rule 29 (expresion2 -> RELOP exp .)
+    SEMICOLON       reduce using rule 29 (expresion2 -> RELOP exp .)
+
+
+state 123
+
+    (60) funccall -> ID LPAREN funccall2 RPAREN .
+
+    TIMES           reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    DIVIDE          reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    PLUS            reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    MINUS           reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    RSBRA           reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    RELOP           reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    RPAREN          reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    COMMA           reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    AND             reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    OR              reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+    SEMICOLON       reduce using rule 60 (funccall -> ID LPAREN funccall2 RPAREN .)
+
+
+state 124
+
+    (61) funccall2 -> exp funccall3 .
+
+    RPAREN          reduce using rule 61 (funccall2 -> exp funccall3 .)
+
+
+state 125
+
+    (63) funccall3 -> COMMA . exp funccall3
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    CHARACTER       shift and go to state 44
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    exp                            shift and go to state 145
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 126
+
+    (64) funccall3 -> empty .
+
+    RPAREN          reduce using rule 64 (funccall3 -> empty .)
+
+
+state 127
+
+    (65) condicion -> IF LPAREN exlog . RPAREN bloque condicion2
+
+    RPAREN          shift and go to state 146
+
+
+state 128
+
+    (23) exlog2 -> empty .
+
+    LPAREN          reduce using rule 23 (exlog2 -> empty .)
+    PLUS            reduce using rule 23 (exlog2 -> empty .)
+    MINUS           reduce using rule 23 (exlog2 -> empty .)
+    NUMERIC         reduce using rule 23 (exlog2 -> empty .)
+    CHARACTER       reduce using rule 23 (exlog2 -> empty .)
+    LOGICAL         reduce using rule 23 (exlog2 -> empty .)
+    INTEGER         reduce using rule 23 (exlog2 -> empty .)
+    ID              reduce using rule 23 (exlog2 -> empty .)
+
+
+state 129
+
+    (97) ciclo -> FOR LPAREN ciclo1 . SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+
+    SEMICOLON       shift and go to state 147
+
+
+state 130
+
+    (98) ciclo1 -> asignacion .
+
+    SEMICOLON       reduce using rule 98 (ciclo1 -> asignacion .)
+
+
+state 131
+
+    (99) ciclo1 -> empty .
+
+    SEMICOLON       reduce using rule 99 (ciclo1 -> empty .)
+
+
+state 132
+
+    (38) asignacion -> idmv EQUALS exlog . SEMICOLON
+
+    SEMICOLON       shift and go to state 148
+
+
+state 133
+
+    (85) read -> READ LPAREN read2 . RPAREN
+
+    RPAREN          shift and go to state 149
+
+
+state 134
+
+    (86) read2 -> CHARACTER .
+
+    RPAREN          reduce using rule 86 (read2 -> CHARACTER .)
+
+
+state 135
+
+    (87) read2 -> empty .
+
+    RPAREN          reduce using rule 87 (read2 -> empty .)
+
+
+state 136
+
+    (80) escritura -> WRITE LPAREN interior . RPAREN
+
+    RPAREN          shift and go to state 150
+
+
+state 137
+
+    (81) interior -> expresion . escritura2
+    (83) escritura2 -> . COMMA interior
+    (84) escritura2 -> . empty
+    (100) empty -> .
+
+    COMMA           shift and go to state 152
+    RPAREN          reduce using rule 100 (empty -> .)
+
+    escritura2                     shift and go to state 151
+    empty                          shift and go to state 153
+
+state 138
+
+    (82) interior -> CHARACTER . escritura2
+    (40) data -> CHARACTER .
+    (83) escritura2 -> . COMMA interior
+    (84) escritura2 -> . empty
+    (100) empty -> .
+
+  ! shift/reduce conflict for COMMA resolved as shift
+  ! reduce/reduce conflict for RPAREN resolved using rule 40 (data -> CHARACTER .)
+    TIMES           reduce using rule 40 (data -> CHARACTER .)
+    DIVIDE          reduce using rule 40 (data -> CHARACTER .)
+    PLUS            reduce using rule 40 (data -> CHARACTER .)
+    MINUS           reduce using rule 40 (data -> CHARACTER .)
+    RELOP           reduce using rule 40 (data -> CHARACTER .)
+    RPAREN          reduce using rule 40 (data -> CHARACTER .)
+    COMMA           shift and go to state 152
+
+  ! COMMA           [ reduce using rule 40 (data -> CHARACTER .) ]
+  ! RPAREN          [ reduce using rule 100 (empty -> .) ]
+
+    escritura2                     shift and go to state 154
+    empty                          shift and go to state 153
+
+state 139
+
+    (21) exlog -> exlog2 expresion . exlog3
+    (24) exlog3 -> . AND exlog
+    (25) exlog3 -> . OR exlog
+    (26) exlog3 -> . empty
+    (100) empty -> .
+
+    AND             shift and go to state 156
+    OR              shift and go to state 157
+    SEMICOLON       reduce using rule 100 (empty -> .)
+    RPAREN          reduce using rule 100 (empty -> .)
+
+    exlog3                         shift and go to state 155
+    empty                          shift and go to state 158
+
+state 140
+
+    (88) func -> FUNCTION functipo ID LPAREN funcargs RPAREN LBRA . funcvars funcest RBRA
+    (95) funcvars -> . vars funcvars
+    (96) funcvars -> . empty
+    (11) vars -> . type idmv vars2 SEMICOLON
+    (100) empty -> .
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    IF              reduce using rule 100 (empty -> .)
+    FOR             reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+    READ            reduce using rule 100 (empty -> .)
+    WRITE           reduce using rule 100 (empty -> .)
+    RETURN          reduce using rule 100 (empty -> .)
+    RBRA            reduce using rule 100 (empty -> .)
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    funcvars                       shift and go to state 159
+    vars                           shift and go to state 160
+    empty                          shift and go to state 161
+    type                           shift and go to state 8
+
+state 141
+
+    (57) args -> type ID args2 .
+
+    RPAREN          reduce using rule 57 (args -> type ID args2 .)
+
+
+state 142
+
+    (58) args2 -> COMMA . args
+    (57) args -> . type ID args2
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    args                           shift and go to state 162
+    type                           shift and go to state 91
+
+state 143
+
+    (59) args2 -> empty .
+
+    RPAREN          reduce using rule 59 (args2 -> empty .)
+
+
+state 144
+
+    (52) idmvf3 -> LSBRA exp RSBRA .
+
+    COMMA           reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    SEMICOLON       reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    EQUALS          reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    TIMES           reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    DIVIDE          reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    PLUS            reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    MINUS           reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    RSBRA           reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    RELOP           reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    RPAREN          reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    AND             reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+    OR              reduce using rule 52 (idmvf3 -> LSBRA exp RSBRA .)
+
+
+state 145
+
+    (63) funccall3 -> COMMA exp . funccall3
+    (63) funccall3 -> . COMMA exp funccall3
+    (64) funccall3 -> . empty
+    (100) empty -> .
+
+    COMMA           shift and go to state 125
+    RPAREN          reduce using rule 100 (empty -> .)
+
+    funccall3                      shift and go to state 163
+    empty                          shift and go to state 126
+
+state 146
+
+    (65) condicion -> IF LPAREN exlog RPAREN . bloque condicion2
+    (14) bloque -> . LBRA bloque2 RBRA
+
+    LBRA            shift and go to state 165
+
+    bloque                         shift and go to state 164
+
+state 147
+
+    (97) ciclo -> FOR LPAREN ciclo1 SEMICOLON . exlog SEMICOLON asignacion RPAREN bloque
+    (21) exlog -> . exlog2 expresion exlog3
+    (22) exlog2 -> . NOT
+    (23) exlog2 -> . empty
+    (100) empty -> .
+
+    NOT             shift and go to state 118
+    LPAREN          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    NUMERIC         reduce using rule 100 (empty -> .)
+    CHARACTER       reduce using rule 100 (empty -> .)
+    LOGICAL         reduce using rule 100 (empty -> .)
+    INTEGER         reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+
+    exlog                          shift and go to state 166
+    exlog2                         shift and go to state 117
+    empty                          shift and go to state 128
+
+state 148
+
+    (38) asignacion -> idmv EQUALS exlog SEMICOLON .
+
+    SEMICOLON       reduce using rule 38 (asignacion -> idmv EQUALS exlog SEMICOLON .)
+    RPAREN          reduce using rule 38 (asignacion -> idmv EQUALS exlog SEMICOLON .)
+
+
+state 149
+
+    (85) read -> READ LPAREN read2 RPAREN .
+
+    SEMICOLON       reduce using rule 85 (read -> READ LPAREN read2 RPAREN .)
+
+
+state 150
+
+    (80) escritura -> WRITE LPAREN interior RPAREN .
+
+    SEMICOLON       reduce using rule 80 (escritura -> WRITE LPAREN interior RPAREN .)
+
+
+state 151
+
+    (81) interior -> expresion escritura2 .
+
+    RPAREN          reduce using rule 81 (interior -> expresion escritura2 .)
+
+
+state 152
+
+    (83) escritura2 -> COMMA . interior
+    (81) interior -> . expresion escritura2
+    (82) interior -> . CHARACTER escritura2
+    (27) expresion -> . exp expresion2
+    (68) exp -> . term exp2
+    (72) term -> . factor term2
+    (76) factor -> . LPAREN expresion RPAREN
+    (77) factor -> . PLUS data
+    (78) factor -> . MINUS data
+    (79) factor -> . data
+    (39) data -> . NUMERIC
+    (40) data -> . CHARACTER
+    (41) data -> . LOGICAL
+    (42) data -> . INTEGER
+    (43) data -> . idmv
+    (44) data -> . funccall
+    (54) idmv -> . ID idmv2
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+
+    CHARACTER       shift and go to state 138
+    LPAREN          shift and go to state 39
+    PLUS            shift and go to state 40
+    MINUS           shift and go to state 42
+    NUMERIC         shift and go to state 43
+    LOGICAL         shift and go to state 45
+    INTEGER         shift and go to state 46
+    ID              shift and go to state 49
+
+    interior                       shift and go to state 167
+    expresion                      shift and go to state 137
+    exp                            shift and go to state 65
+    term                           shift and go to state 37
+    factor                         shift and go to state 38
+    data                           shift and go to state 41
+    idmv                           shift and go to state 47
+    funccall                       shift and go to state 48
+
+state 153
+
+    (84) escritura2 -> empty .
+
+    RPAREN          reduce using rule 84 (escritura2 -> empty .)
+
+
+state 154
+
+    (82) interior -> CHARACTER escritura2 .
+
+    RPAREN          reduce using rule 82 (interior -> CHARACTER escritura2 .)
+
+
+state 155
+
+    (21) exlog -> exlog2 expresion exlog3 .
+
+    SEMICOLON       reduce using rule 21 (exlog -> exlog2 expresion exlog3 .)
+    RPAREN          reduce using rule 21 (exlog -> exlog2 expresion exlog3 .)
+
+
+state 156
+
+    (24) exlog3 -> AND . exlog
+    (21) exlog -> . exlog2 expresion exlog3
+    (22) exlog2 -> . NOT
+    (23) exlog2 -> . empty
+    (100) empty -> .
+
+    NOT             shift and go to state 118
+    LPAREN          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    NUMERIC         reduce using rule 100 (empty -> .)
+    CHARACTER       reduce using rule 100 (empty -> .)
+    LOGICAL         reduce using rule 100 (empty -> .)
+    INTEGER         reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+
+    exlog                          shift and go to state 168
+    exlog2                         shift and go to state 117
+    empty                          shift and go to state 128
+
+state 157
+
+    (25) exlog3 -> OR . exlog
+    (21) exlog -> . exlog2 expresion exlog3
+    (22) exlog2 -> . NOT
+    (23) exlog2 -> . empty
+    (100) empty -> .
+
+    NOT             shift and go to state 118
+    LPAREN          reduce using rule 100 (empty -> .)
+    PLUS            reduce using rule 100 (empty -> .)
+    MINUS           reduce using rule 100 (empty -> .)
+    NUMERIC         reduce using rule 100 (empty -> .)
+    CHARACTER       reduce using rule 100 (empty -> .)
+    LOGICAL         reduce using rule 100 (empty -> .)
+    INTEGER         reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+
+    exlog                          shift and go to state 169
+    exlog2                         shift and go to state 117
+    empty                          shift and go to state 128
+
+state 158
+
+    (26) exlog3 -> empty .
+
+    SEMICOLON       reduce using rule 26 (exlog3 -> empty .)
+    RPAREN          reduce using rule 26 (exlog3 -> empty .)
+
+
+state 159
+
+    (88) func -> FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars . funcest RBRA
+    (93) funcest -> . estatuto funcest
+    (94) funcest -> . empty
+    (30) estatuto -> . estatuto2 SEMICOLON
+    (100) empty -> .
+    (31) estatuto2 -> . condicion
+    (32) estatuto2 -> . ciclo
+    (33) estatuto2 -> . funccall
+    (34) estatuto2 -> . asignacion
+    (35) estatuto2 -> . read
+    (36) estatuto2 -> . escritura
+    (37) estatuto2 -> . return
+    (65) condicion -> . IF LPAREN exlog RPAREN bloque condicion2
+    (97) ciclo -> . FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (85) read -> . READ LPAREN read2 RPAREN
+    (80) escritura -> . WRITE LPAREN interior RPAREN
+    (45) return -> . RETURN return2
+    (54) idmv -> . ID idmv2
+
+    RBRA            reduce using rule 100 (empty -> .)
+    IF              shift and go to state 80
+    FOR             shift and go to state 81
+    ID              shift and go to state 82
+    READ            shift and go to state 84
+    WRITE           shift and go to state 85
+    RETURN          shift and go to state 86
+
+    funcest                        shift and go to state 170
+    estatuto                       shift and go to state 171
+    empty                          shift and go to state 172
+    estatuto2                      shift and go to state 72
+    condicion                      shift and go to state 73
+    ciclo                          shift and go to state 74
+    funccall                       shift and go to state 75
+    asignacion                     shift and go to state 76
+    read                           shift and go to state 77
+    escritura                      shift and go to state 78
+    return                         shift and go to state 79
+    idmv                           shift and go to state 83
+
+state 160
+
+    (95) funcvars -> vars . funcvars
+    (95) funcvars -> . vars funcvars
+    (96) funcvars -> . empty
+    (11) vars -> . type idmv vars2 SEMICOLON
+    (100) empty -> .
+    (17) type -> . BOOL
+    (18) type -> . CHAR
+    (19) type -> . INT
+    (20) type -> . NUM
+
+    IF              reduce using rule 100 (empty -> .)
+    FOR             reduce using rule 100 (empty -> .)
+    ID              reduce using rule 100 (empty -> .)
+    READ            reduce using rule 100 (empty -> .)
+    WRITE           reduce using rule 100 (empty -> .)
+    RETURN          reduce using rule 100 (empty -> .)
+    RBRA            reduce using rule 100 (empty -> .)
+    BOOL            shift and go to state 9
+    CHAR            shift and go to state 10
+    INT             shift and go to state 11
+    NUM             shift and go to state 12
+
+    vars                           shift and go to state 160
+    funcvars                       shift and go to state 173
+    empty                          shift and go to state 161
+    type                           shift and go to state 8
+
+state 161
+
+    (96) funcvars -> empty .
+
+    IF              reduce using rule 96 (funcvars -> empty .)
+    FOR             reduce using rule 96 (funcvars -> empty .)
+    ID              reduce using rule 96 (funcvars -> empty .)
+    READ            reduce using rule 96 (funcvars -> empty .)
+    WRITE           reduce using rule 96 (funcvars -> empty .)
+    RETURN          reduce using rule 96 (funcvars -> empty .)
+    RBRA            reduce using rule 96 (funcvars -> empty .)
+
+
+state 162
+
+    (58) args2 -> COMMA args .
+
+    RPAREN          reduce using rule 58 (args2 -> COMMA args .)
+
+
+state 163
+
+    (63) funccall3 -> COMMA exp funccall3 .
+
+    RPAREN          reduce using rule 63 (funccall3 -> COMMA exp funccall3 .)
+
+
+state 164
+
+    (65) condicion -> IF LPAREN exlog RPAREN bloque . condicion2
+    (66) condicion2 -> . ELSE bloque
+    (67) condicion2 -> . empty
+    (100) empty -> .
+
+    ELSE            shift and go to state 175
+    SEMICOLON       reduce using rule 100 (empty -> .)
+
+    condicion2                     shift and go to state 174
+    empty                          shift and go to state 176
+
+state 165
+
+    (14) bloque -> LBRA . bloque2 RBRA
+    (15) bloque2 -> . empty
+    (16) bloque2 -> . estatuto bloque2
+    (100) empty -> .
+    (30) estatuto -> . estatuto2 SEMICOLON
+    (31) estatuto2 -> . condicion
+    (32) estatuto2 -> . ciclo
+    (33) estatuto2 -> . funccall
+    (34) estatuto2 -> . asignacion
+    (35) estatuto2 -> . read
+    (36) estatuto2 -> . escritura
+    (37) estatuto2 -> . return
+    (65) condicion -> . IF LPAREN exlog RPAREN bloque condicion2
+    (97) ciclo -> . FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (85) read -> . READ LPAREN read2 RPAREN
+    (80) escritura -> . WRITE LPAREN interior RPAREN
+    (45) return -> . RETURN return2
+    (54) idmv -> . ID idmv2
+
+    RBRA            reduce using rule 100 (empty -> .)
+    IF              shift and go to state 80
+    FOR             shift and go to state 81
+    ID              shift and go to state 82
+    READ            shift and go to state 84
+    WRITE           shift and go to state 85
+    RETURN          shift and go to state 86
+
+    bloque2                        shift and go to state 177
+    empty                          shift and go to state 178
+    estatuto                       shift and go to state 179
+    estatuto2                      shift and go to state 72
+    condicion                      shift and go to state 73
+    ciclo                          shift and go to state 74
+    funccall                       shift and go to state 75
+    asignacion                     shift and go to state 76
+    read                           shift and go to state 77
+    escritura                      shift and go to state 78
+    return                         shift and go to state 79
+    idmv                           shift and go to state 83
+
+state 166
+
+    (97) ciclo -> FOR LPAREN ciclo1 SEMICOLON exlog . SEMICOLON asignacion RPAREN bloque
+
+    SEMICOLON       shift and go to state 180
+
+
+state 167
+
+    (83) escritura2 -> COMMA interior .
+
+    RPAREN          reduce using rule 83 (escritura2 -> COMMA interior .)
+
+
+state 168
+
+    (24) exlog3 -> AND exlog .
+
+    SEMICOLON       reduce using rule 24 (exlog3 -> AND exlog .)
+    RPAREN          reduce using rule 24 (exlog3 -> AND exlog .)
+
+
+state 169
+
+    (25) exlog3 -> OR exlog .
+
+    SEMICOLON       reduce using rule 25 (exlog3 -> OR exlog .)
+    RPAREN          reduce using rule 25 (exlog3 -> OR exlog .)
+
+
+state 170
+
+    (88) func -> FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest . RBRA
+
+    RBRA            shift and go to state 181
+
+
+state 171
+
+    (93) funcest -> estatuto . funcest
+    (93) funcest -> . estatuto funcest
+    (94) funcest -> . empty
+    (30) estatuto -> . estatuto2 SEMICOLON
+    (100) empty -> .
+    (31) estatuto2 -> . condicion
+    (32) estatuto2 -> . ciclo
+    (33) estatuto2 -> . funccall
+    (34) estatuto2 -> . asignacion
+    (35) estatuto2 -> . read
+    (36) estatuto2 -> . escritura
+    (37) estatuto2 -> . return
+    (65) condicion -> . IF LPAREN exlog RPAREN bloque condicion2
+    (97) ciclo -> . FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (85) read -> . READ LPAREN read2 RPAREN
+    (80) escritura -> . WRITE LPAREN interior RPAREN
+    (45) return -> . RETURN return2
+    (54) idmv -> . ID idmv2
+
+    RBRA            reduce using rule 100 (empty -> .)
+    IF              shift and go to state 80
+    FOR             shift and go to state 81
+    ID              shift and go to state 82
+    READ            shift and go to state 84
+    WRITE           shift and go to state 85
+    RETURN          shift and go to state 86
+
+    estatuto                       shift and go to state 171
+    funcest                        shift and go to state 182
+    empty                          shift and go to state 172
+    estatuto2                      shift and go to state 72
+    condicion                      shift and go to state 73
+    ciclo                          shift and go to state 74
+    funccall                       shift and go to state 75
+    asignacion                     shift and go to state 76
+    read                           shift and go to state 77
+    escritura                      shift and go to state 78
+    return                         shift and go to state 79
+    idmv                           shift and go to state 83
+
+state 172
+
+    (94) funcest -> empty .
+
+    RBRA            reduce using rule 94 (funcest -> empty .)
+
+
+state 173
+
+    (95) funcvars -> vars funcvars .
+
+    IF              reduce using rule 95 (funcvars -> vars funcvars .)
+    FOR             reduce using rule 95 (funcvars -> vars funcvars .)
+    ID              reduce using rule 95 (funcvars -> vars funcvars .)
+    READ            reduce using rule 95 (funcvars -> vars funcvars .)
+    WRITE           reduce using rule 95 (funcvars -> vars funcvars .)
+    RETURN          reduce using rule 95 (funcvars -> vars funcvars .)
+    RBRA            reduce using rule 95 (funcvars -> vars funcvars .)
+
+
+state 174
+
+    (65) condicion -> IF LPAREN exlog RPAREN bloque condicion2 .
+
+    SEMICOLON       reduce using rule 65 (condicion -> IF LPAREN exlog RPAREN bloque condicion2 .)
+
+
+state 175
+
+    (66) condicion2 -> ELSE . bloque
+    (14) bloque -> . LBRA bloque2 RBRA
+
+    LBRA            shift and go to state 165
+
+    bloque                         shift and go to state 183
+
+state 176
+
+    (67) condicion2 -> empty .
+
+    SEMICOLON       reduce using rule 67 (condicion2 -> empty .)
+
+
+state 177
+
+    (14) bloque -> LBRA bloque2 . RBRA
+
+    RBRA            shift and go to state 184
+
+
+state 178
+
+    (15) bloque2 -> empty .
+
+    RBRA            reduce using rule 15 (bloque2 -> empty .)
+
+
+state 179
+
+    (16) bloque2 -> estatuto . bloque2
+    (15) bloque2 -> . empty
+    (16) bloque2 -> . estatuto bloque2
+    (100) empty -> .
+    (30) estatuto -> . estatuto2 SEMICOLON
+    (31) estatuto2 -> . condicion
+    (32) estatuto2 -> . ciclo
+    (33) estatuto2 -> . funccall
+    (34) estatuto2 -> . asignacion
+    (35) estatuto2 -> . read
+    (36) estatuto2 -> . escritura
+    (37) estatuto2 -> . return
+    (65) condicion -> . IF LPAREN exlog RPAREN bloque condicion2
+    (97) ciclo -> . FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque
+    (60) funccall -> . ID LPAREN funccall2 RPAREN
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (85) read -> . READ LPAREN read2 RPAREN
+    (80) escritura -> . WRITE LPAREN interior RPAREN
+    (45) return -> . RETURN return2
+    (54) idmv -> . ID idmv2
+
+    RBRA            reduce using rule 100 (empty -> .)
+    IF              shift and go to state 80
+    FOR             shift and go to state 81
+    ID              shift and go to state 82
+    READ            shift and go to state 84
+    WRITE           shift and go to state 85
+    RETURN          shift and go to state 86
+
+    estatuto                       shift and go to state 179
+    bloque2                        shift and go to state 185
+    empty                          shift and go to state 178
+    estatuto2                      shift and go to state 72
+    condicion                      shift and go to state 73
+    ciclo                          shift and go to state 74
+    funccall                       shift and go to state 75
+    asignacion                     shift and go to state 76
+    read                           shift and go to state 77
+    escritura                      shift and go to state 78
+    return                         shift and go to state 79
+    idmv                           shift and go to state 83
+
+state 180
+
+    (97) ciclo -> FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON . asignacion RPAREN bloque
+    (38) asignacion -> . idmv EQUALS exlog SEMICOLON
+    (54) idmv -> . ID idmv2
+
+    ID              shift and go to state 19
+
+    asignacion                     shift and go to state 186
+    idmv                           shift and go to state 83
+
+state 181
+
+    (88) func -> FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA .
+
+    FUNCTION        reduce using rule 88 (func -> FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA .)
+    MAIN            reduce using rule 88 (func -> FUNCTION functipo ID LPAREN funcargs RPAREN LBRA funcvars funcest RBRA .)
+
+
+state 182
+
+    (93) funcest -> estatuto funcest .
+
+    RBRA            reduce using rule 93 (funcest -> estatuto funcest .)
+
+
+state 183
+
+    (66) condicion2 -> ELSE bloque .
+
+    SEMICOLON       reduce using rule 66 (condicion2 -> ELSE bloque .)
+
+
+state 184
+
+    (14) bloque -> LBRA bloque2 RBRA .
+
+    ELSE            reduce using rule 14 (bloque -> LBRA bloque2 RBRA .)
+    SEMICOLON       reduce using rule 14 (bloque -> LBRA bloque2 RBRA .)
+
+
+state 185
+
+    (16) bloque2 -> estatuto bloque2 .
+
+    RBRA            reduce using rule 16 (bloque2 -> estatuto bloque2 .)
+
+
+state 186
+
+    (97) ciclo -> FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion . RPAREN bloque
+
+    RPAREN          shift and go to state 187
+
+
+state 187
+
+    (97) ciclo -> FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN . bloque
+    (14) bloque -> . LBRA bloque2 RBRA
+
+    LBRA            shift and go to state 165
+
+    bloque                         shift and go to state 188
+
+state 188
+
+    (97) ciclo -> FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque .
+
+    SEMICOLON       reduce using rule 97 (ciclo -> FOR LPAREN ciclo1 SEMICOLON exlog SEMICOLON asignacion RPAREN bloque .)
+
+WARNING: 
+WARNING: Conflicts:
+WARNING: 
+WARNING: shift/reduce conflict for COMMA in state 138 resolved as shift
+WARNING: reduce/reduce conflict in state 138 resolved using rule (data -> CHARACTER)
+WARNING: rejected rule (empty -> <empty>) in state 138
