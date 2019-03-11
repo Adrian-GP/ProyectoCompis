@@ -67,7 +67,7 @@ def t_ID(t):
     return t
 
 def t_CHARACTER(t):
-    r'\"[a-zA-Z_][a-zA-Z0-9_]*\"'
+    r'\".*?\"'
     if t.value in reserved:
         t.type = reserved[ t.value ]
     return t
