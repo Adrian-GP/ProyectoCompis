@@ -1,0 +1,67 @@
+
+program prueba;
+
+int id1, id2;
+bool b1;
+
+function char miFuncion(){
+  char c1;
+  c1 = "hola";
+
+  return c1;
+}
+
+function num miFuncion3(num a){
+    if(a == 0){
+      return 1;
+    }else{
+      if(a == 1){
+        return 1;
+      }else{
+        return 1 + miFuncion3(a - 1) + miFuncion3(a - 2);
+      };
+    };
+}
+
+function void miFuncion2(int i1, num i2){
+  if(i2 == 4){
+    write("es igual");
+  } else {
+    write(i2 , "no es igual a", 4);
+  };
+  return;
+}
+
+
+
+main{
+
+num id3;
+int i4;
+num mat[2][2];
+num vec[4];
+bool flag;
+char palabra;
+
+  for(id3 = 0; id3 < 10; id3 = id3 + 1){
+      write("id3 + 1 = ", id3 + 1);
+  };
+
+  for(; id3 < 20; id3 = id3 + 1){
+      for(i4 = 0; i4 <= 5 ; i4 = i4 * 2){
+         if(flag){
+            write("ok");
+         } else {
+            return 0;
+         };
+      };
+  };
+
+  miFuncion();
+
+  mat[0][0] = vec[1] * id3 + miFuncion3(10);
+
+  id3 = miFuncion() + mat[0][1] / 8 * 3;
+  flag = !((3 < 4) & (5 + (3 + 4 * 7 - -2) / 8 == 11) | (7 != 8));
+
+}
